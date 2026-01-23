@@ -1,9 +1,21 @@
+import java.util.Scanner;
+
 public class Protagonist {
     public static void main(String[] args) {
-        Ui.line();
         Ui.greeting();
-        Ui.line();
-        Ui.goodbye();
-        Ui.line();
+        Scanner scanner = new Scanner(System.in);
+
+        while(true){
+            String input = scanner.nextLine();
+
+            if(input.equals("bye")){
+                Ui.emptyLine();
+                Ui.goodbye();
+                break;
+            }
+            Ui.emptyLine();
+            Ui.echo(input);
+        }
     }
+
 }
