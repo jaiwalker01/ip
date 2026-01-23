@@ -21,7 +21,7 @@ public class Ui {
 
     public static void echo(String input){
         line();
-        System.out.println(input);
+        System.out.println("added: '" + input + "'");
         line();
     }
 
