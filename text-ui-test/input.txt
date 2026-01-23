@@ -1,0 +1,9 @@
+todo task 1
+todo task 2
+deadline finish task 3 /by tmr 2359
+list
+mark 2
+mark 3
+event movie /from today /to tmr
+unmark 3
+bye
