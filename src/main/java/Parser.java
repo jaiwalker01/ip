@@ -49,7 +49,7 @@ public class Parser {
                 Ui.emptyLine();
                 Ui.line();
             } else {
-                Command.unKnownCommand(input);
+                Command.byError(input);
             }
         } else if (parts[0].equals("event")) {
             int indexFrom = 0;
@@ -77,7 +77,7 @@ public class Parser {
                 Ui.emptyLine();
                 Ui.line();
             } else {
-                Command.unKnownCommand(input);
+                Command.fromToError(input);
             }
         } else {
             Command.unKnownCommand(input);

@@ -66,7 +66,31 @@ public class Command {
     public static void unKnownCommand(String input){
         Ui.emptyLine();
         Ui.line();
-        System.out.println("Unknown command: " + input);
+        System.out.println("Unknown command: " + input +
+                "\n\nPlease try using one of the following commands:" +
+                "\ntodo <task>                     --> to log generic tasks to do" +
+                "\ndeadline <task> /by <time/date> --> to log tasks with deadlines" +
+                "\nevent <task> /from <start time/date> /to <end time/date> --> self-explanatory" +
+                "\nlist                            --> to list all tasks" +
+                "\nmark <task no.>                 --> to mark a task as done" +
+                "\nunmark <task no.>               --> to mark a task as NOT done" +
+                "\nbye                             --> to exit the chat");
+        Ui.line();
+    }
+    public static void byError(String input){
+        Ui.emptyLine();
+        Ui.line();
+        System.out.println("Unknown command: " + input +
+                "\n\nPlease use '/by' to log deadline tasks:" +
+                "\ndeadline <task> /by <time/date> --> to log tasks with deadlines");
+        Ui.line();
+    }
+    public static void fromToError(String input){
+        Ui.emptyLine();
+        Ui.line();
+        System.out.println("Unknown command: " + input +
+                "\n\nPlease use '/from' and '/to as follows to log events:" +
+                "\nevent <task> /from <start time/date> /to <end time/date> --> self-explanatory");
         Ui.line();
     }
 }
