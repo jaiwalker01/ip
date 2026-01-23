@@ -74,6 +74,7 @@ public class Command {
                 "\nlist                            --> to list all tasks" +
                 "\nmark <task no.>                 --> to mark a task as done" +
                 "\nunmark <task no.>               --> to mark a task as NOT done" +
+                "\ndelete <task no.>               --> to delete a task" +
                 "\nbye                             --> to exit the chat");
         Ui.line();
     }
@@ -92,5 +93,32 @@ public class Command {
                 "\n\nPlease use '/from' and '/to as follows to log events:" +
                 "\nevent <task> /from <start time/date> /to <end time/date> --> self-explanatory");
         Ui.line();
+    }
+    public static void delete(Tasklist tasklist, String index, String input) {
+        try {
+            int x = Integer.parseInt(index);
+            if (x < tasklist.totalTasks() && x > 0) {
+                Task task = tasklist.getTask(x - 1);
+                tasklist.removeTask(x - 1);
+                Ui.emptyLine();
+                Ui.line();
+                Ui.deleteTaskMsg();
+                Command.printTask(task);
+                Command.numOfTasks(tasklist);
+                Ui.emptyLine();
+                Ui.line();
+            } else {
+                Command.deleteError(tasklist, index);
+            }
+        } catch (NumberFormatException e) {
+//          System.out.println("Invalid marking: " + maybeIndex);
+            Command.addToList(tasklist, input);
+            return;
+        }
+
+    }
+    public static void deleteError(Tasklist tasklist, String input) {
+        Ui.deleteError(tasklist.totalTasks(), input);
+
     }
 }

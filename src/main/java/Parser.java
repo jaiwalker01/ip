@@ -79,6 +79,8 @@ public class Parser {
             } else {
                 Command.fromToError(input);
             }
+        } else if (parts[0].equals("delete") && parts.length == 2) {
+            Command.delete(tasklist, parts[1], input);
         } else {
             Command.unKnownCommand(input);
         }

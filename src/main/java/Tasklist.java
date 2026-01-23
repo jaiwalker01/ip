@@ -18,14 +18,16 @@ public class Tasklist {
         task.setNum(taskNumber);
         taskNumber++;
     }
+    public void removeTask(int index){
+        tasks.remove(index);
+        taskNumber--;
+        for(int i = index; i < tasks.size(); i++){
+            tasks.get(i).setNum(tasks.get(i).getNumber() - 1);
+        }
+    }
 
     public Task getTask(int index){
         return tasks.get(index);
-    }
-
-    public String taskWithNumber(Task task){
-        String str = task.getNumber() + "." + task.toString();
-        return str;
     }
 
     public void doTask(int index){
