@@ -12,6 +12,9 @@ public class Command {
         System.out.println(tasklist);
         Ui.line();
     }
+    public static void printTask(Task task) {
+        System.out.println(task);
+    }
     public static void mark(Tasklist tasklist, String maybeIndex, String input) {
         try {
             int x = Integer.parseInt(maybeIndex);
@@ -20,7 +23,7 @@ public class Command {
                 Ui.emptyLine();
                 Ui.line();
                 Ui.markMsg();
-                tasklist.getTask(x - 1).printTask();
+                System.out.println(tasklist.getTask(x - 1));
                 Ui.line();
             } else {
                 Command.addToList(tasklist, input);
@@ -39,8 +42,8 @@ public class Command {
                 tasklist.undoTask(x - 1);
                 Ui.emptyLine();
                 Ui.line();
-                Ui.markMsg();
-                tasklist.getTask(x - 1).printTask();
+                Ui.unMarkMsg();
+                System.out.println(tasklist.getTask(x - 1));
                 Ui.line();
             } else {
                 Command.addToList(tasklist, input);
@@ -56,5 +59,14 @@ public class Command {
         tasklist.add(new Task(input));
         Ui.emptyLine();
         Ui.echo(input);
+    }
+    public static void numOfTasks(Tasklist tasklist) {
+        System.out.println("You have " + (tasklist.totalTasks() - 1) + " tasks in the list");
+    }
+    public static void unKnownCommand(String input){
+        Ui.emptyLine();
+        Ui.line();
+        System.out.println("Unknown command: " + input);
+        Ui.line();
     }
 }

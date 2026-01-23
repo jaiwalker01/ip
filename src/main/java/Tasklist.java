@@ -15,12 +15,17 @@ public class Tasklist {
 
     public void add(Task task){
         tasks.add(task);
-        task.num(taskNumber);
+        task.setNum(taskNumber);
         taskNumber++;
     }
 
     public Task getTask(int index){
         return tasks.get(index);
+    }
+
+    public String taskWithNumber(Task task){
+        String str = task.getNumber() + "." + task.toString();
+        return str;
     }
 
     public void doTask(int index){
@@ -36,7 +41,7 @@ public class Tasklist {
         String str = "";
 
         for (Task task: tasks) {
-            str +=  task.toString() + "\n";
+            str +=  task.getNumber() + "." + task.toString() + "\n";
         }
 
         return str;

@@ -6,8 +6,11 @@ public class Task {
     public Task(String name){
         this.name = name;
     }
-    public void num(int k){
+    public void setNum(int k){
         this.number = k;
+    }
+    public int getNumber(){
+        return this.number;
     }
     public void taskDone(){
         done = true;
@@ -21,12 +24,7 @@ public class Task {
     @Override
     public String toString() {
         String str = (this.taskStatus()) ? "X" : " ";
-        return number + ".[" + str + "] " + name;
+        return "[" + str + "] " + name;
     }
 
-    public void printTask(){
-        String str = (this.taskStatus()) ? "X" : " ";
-        str = "[" + str + "] " + name;
-        System.out.println(str);
-    }
 }

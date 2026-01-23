@@ -9,7 +9,10 @@ public class Ui {
         System.out.println("Alright, I've marked this task as done:\n");
     }
     public static void unMarkMsg(){
-        System.out.println("Damn okay, I've marked this task as not done yet:\n");
+        System.out.println("Okay, I've marked this task as not done yet:\n");
+    }
+    public static void addedTaskMsg(){
+        System.out.println("Alright, I've added this task:\n");
     }
     public static void emptyLine() {
         System.out.println("");
