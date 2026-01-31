@@ -1,11 +1,12 @@
 public class Task {
-    private String name;
+    private final String name;
     private int number;
-    private boolean done = false;
+    private boolean isDone = false;
 
     public Task(String name){
         this.name = name;
     }
+
     public void setNum(int k){
         this.number = k;
     }
@@ -13,13 +14,13 @@ public class Task {
         return this.number;
     }
     public void taskDone(){
-        done = true;
+        isDone = true;
     }
     public void taskNotDone(){
-        done = false;
+        isDone = false;
     }
     public boolean taskStatus(){
-        return done;
+        return isDone;
     }
     @Override
     public String toString() {

@@ -1,109 +1,140 @@
 /*
-takes in a string input and dishes out the correct command respective to the input
-*/
+ * Takes in a string input and gives out the correct command.
+ */
 public class Parser {
-    public static Boolean parse(String input, Tasklist tasklist) {
-        String inp = input.trim();
-        String[] parts = inp.split("\\s+"); // splits on whitespaces
 
-        String result = Parser.combiner(parts, 1, parts.length -1 );
+    public static boolean parse(String input, TaskList tasklist)
+            throws ProtagonistException {
 
-        if (inp.equals("bye")) {
-            Command.bye();
-            return false;
-        } else if (inp.equals("list")) {
-            Command.printList(tasklist);
-        } else if (parts[0].equals("mark") && parts.length == 2) {
-            Command.mark(tasklist, parts[1], input);
-        } else if (parts[0].equals("unmark") && parts.length == 2) {
-            Command.unmark(tasklist, parts[1], input);
-        } else if (parts[0].equals("todo") && parts.length >= 2){
-            ToDo todoTask = new ToDo(result);
-            tasklist.add(todoTask);
-            Ui.emptyLine();
-            Ui.line();
-            Ui.addedTaskMsg();
-            Command.printTask(todoTask);
-            Command.numOfTasks(tasklist);
-            Ui.emptyLine();
-            Ui.line();
-        } else if (parts[0].equals("deadline")) {
-            int index = 0;
-            for (int i = 1; i < parts.length; i++){
-                if (parts[i].equals("/by")){
-                    index = i;
-                    break;
-                }
-            }
+        String trimmedInput = input.trim();
 
-            if (index != 0){
-                String firstPart = Parser.combiner(parts, 1, index - 1);
-                String secondPart = Parser.combiner(parts, index + 1, parts.length - 1);
-                Deadline deadline = new Deadline(input, firstPart, secondPart);
-                tasklist.add(deadline);
-                Ui.emptyLine();
-                Ui.line();
-                Ui.addedTaskMsg();
-                Command.printTask(deadline);
-                Command.numOfTasks(tasklist);
-                Ui.emptyLine();
-                Ui.line();
-            } else {
-                Command.byError(input);
-            }
-        } else if (parts[0].equals("event")) {
-            int indexFrom = 0;
-            int indexTo = 0;
-            for (int i = 1; i < parts.length; i++){
-                if (parts[i].equals("/from")){
-                    indexFrom = i;
-                } else if (parts[i].equals("/to")){
-                    indexTo = i;
-                    break;
-                }
-            }
-
-            if (indexFrom != 0 && indexTo != 0 && indexFrom + 1 < indexTo && indexTo != parts.length - 1){
-                String firstPart = Parser.combiner(parts, 1, indexFrom - 1);
-                String secondPart = Parser.combiner(parts, indexFrom + 1, indexTo - 1);
-                String thirdPart = Parser.combiner(parts, indexTo + 1, parts.length - 1);
-                Event event = new Event(input, firstPart, secondPart, thirdPart);
-                tasklist.add(event);
-                Ui.emptyLine();
-                Ui.line();
-                Ui.addedTaskMsg();
-                Command.printTask(event);
-                Command.numOfTasks(tasklist);
-                Ui.emptyLine();
-                Ui.line();
-            } else {
-                Command.fromToError(input);
-            }
-        } else if (parts[0].equals("delete") && parts.length == 2) {
-            Command.delete(tasklist, parts[1], input);
-        } else {
-            Command.unKnownCommand(input);
+        if (trimmedInput.isEmpty()) {
+            throw new ProtagonistException("Command cannot be empty.");
         }
+
+        String[] parts = trimmedInput.split("\\s+");
+        String commandString = parts[0];
+
+        switch (commandString) {
+
+            case "bye":
+                Command.bye();
+                return false;
+
+            case "list":
+                Command.printList(tasklist);
+                return true;
+
+            case "mark":
+                requireExactArgs(parts, 2, "mark <task number>");
+                Command.mark(tasklist, parts[1]);
+                return true;
+
+            case "unmark":
+                requireExactArgs(parts, 2, "unmark <task number>");
+                Command.unmark(tasklist, parts[1]);
+                return true;
+
+            case "delete":
+                requireExactArgs(parts, 2, "delete <task number>");
+                Command.delete(tasklist, parts[1]);
+                return true;
+
+            case "todo":
+                if (parts.length < 2) {
+                    throw new ProtagonistException("Usage: todo <description>");
+                }
+
+                String todoDesc = combine(parts, 1, parts.length - 1);
+                Task todo = new ToDo(todoDesc);
+                tasklist.add(todo);
+                Ui.showAdd(todo, tasklist.size());
+                return true;
+
+            case "deadline":
+                return parseDeadline(parts, input, tasklist);
+
+            case "event":
+                return parseEvent(parts, input, tasklist);
+
+            default:
+                throw new UnknownCommandException(input);
+        }
+    }
+
+    private static boolean parseDeadline(String[] parts, String input, TaskList tasklist)
+            throws ProtagonistException {
+
+        int byIndex = find(parts, "/by");
+
+        if (byIndex == -1 || byIndex == 1 || byIndex == parts.length - 1) {
+            throw new ProtagonistException(
+                    "Bad Structure. Use: deadline <task> /by <date/time>");
+        }
+
+        String desc = combine(parts, 1, byIndex - 1);
+        String by = combine(parts, byIndex + 1, parts.length - 1);
+
+        Task deadline = new Deadline(input, desc, by);
+        tasklist.add(deadline);
+        Ui.showAdd(deadline, tasklist.size());
+
         return true;
     }
 
-    // helper function for joining strings from a list of string
-    // [a, b, c, d, e]  --> combiner(list, 1, 3) --> b c d
-    public static String combiner(String[] inputList, int start, int end){
-        StringBuilder sb = new StringBuilder();
-        String result = "";
-        for (int i = start; i <= Math.min(end, inputList.length - 1); i++) {
-            if (i >= start) {
-                sb.append(inputList[i]);
-            }
+    private static boolean parseEvent(String[] parts, String input, TaskList tasklist)
+            throws ProtagonistException {
 
-            result = sb.toString();
-            if (i == inputList.length - 1) {
-                break;
-            }
+        int fromIndex = find(parts, "/from");
+        int toIndex = find(parts, "/to");
 
-            sb.append(" ");
+        if (fromIndex == -1 || toIndex == -1 ||
+                fromIndex == 1 ||
+                fromIndex + 1 >= toIndex ||
+                toIndex == parts.length - 1) {
+
+            throw new ProtagonistException(
+                    "Format mismatch.Try: event <task> /from <start> /to <end>");
         }
-        return result;
+
+        String desc = combine(parts, 1, fromIndex - 1);
+        String from = combine(parts, fromIndex + 1, toIndex - 1);
+        String to = combine(parts, toIndex + 1, parts.length - 1);
+
+        Task event = new Event(input, desc, from, to);
+        tasklist.add(event);
+        Ui.showAdd(event, tasklist.size());
+
+        return true;
+    }
+
+    private static void requireExactArgs(String[] parts, int count, String usage)
+            throws ProtagonistException {
+
+        if (parts.length != count) {
+            throw new ProtagonistException("Usage: " + usage);
+        }
+    }
+
+    private static int find(String[] parts, String target) {
+        for (int i = 0; i < parts.length; i++) {
+            if (parts[i].equals(target)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    private static String combine(String[] parts, int start, int end) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = start; i <= end; i++) {
+            sb.append(parts[i]);
+            if (i < end) {
+                sb.append(" ");
+            }
+        }
+
+        return sb.toString();
     }
 }

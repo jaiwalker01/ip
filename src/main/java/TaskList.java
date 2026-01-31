@@ -1,28 +1,26 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tasklist {
-    private List<Task> tasks;
-    private static int taskNumber = 1;
+public class TaskList {
+    private final List<Task> tasks;
 
-    public Tasklist() {
-        this.tasks = new ArrayList<>(100);
+    public TaskList() {
+        this.tasks = new ArrayList<>();
     }
 
-    public int totalTasks() {
-        return taskNumber;
+    public int size() {
+        return tasks.size();
     }
 
     public void add(Task task){
         tasks.add(task);
-        task.setNum(taskNumber);
-        taskNumber++;
+        task.setNum(tasks.size());
     }
+
     public void removeTask(int index){
         tasks.remove(index);
-        taskNumber--;
-        for(int i = index; i < tasks.size(); i++){
-            tasks.get(i).setNum(tasks.get(i).getNumber() - 1);
+        for (int i = index; i < tasks.size(); i++){
+            tasks.get(i).setNum(i + 1); // renumber from index onwards
         }
     }
 

@@ -2,14 +2,21 @@ import java.util.Scanner;
 
 public class Protagonist {
     public static void main(String[] args) {
-        Tasklist tasklist = new Tasklist();
+        TaskList tasklist = new TaskList();
         Scanner scanner = new Scanner(System.in);
-        boolean bool = true;
+        boolean isRunning = true;
 
         Command.hi();
-        while(bool){
-            String input = scanner.nextLine();
-            bool = Parser.parse(input, tasklist);
+        while(isRunning) {
+            try {
+                String input = scanner.nextLine();
+                isRunning = Parser.parse(input, tasklist);
+            } catch (UnknownCommandException e) {
+                Ui.unknownCommand(e.getMessage());
+            } catch (ProtagonistException e) {
+                Ui.showError(e.getMessage());
+            }
+
         }
     }
 
