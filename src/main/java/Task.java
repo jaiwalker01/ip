@@ -13,6 +13,9 @@ public class Task {
     public int getNumber(){
         return this.number;
     }
+    public String getName(){
+        return this.name;
+    }
     public void taskDone(){
         isDone = true;
     }
@@ -22,6 +25,12 @@ public class Task {
     public boolean taskStatus(){
         return isDone;
     }
+    public String toFileFormat() {
+        // T | <0/1> | <name>
+        String done = isDone ? "1" : "0";
+        return "T | " + done + " | " + name;
+    }
+
     @Override
     public String toString() {
         String str = (this.taskStatus()) ? "X" : " ";
