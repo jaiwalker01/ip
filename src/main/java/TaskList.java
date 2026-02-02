@@ -36,6 +36,14 @@ public class TaskList {
         tasks.get(index).taskNotDone();
     }
 
+    public String toSaveLines() {
+        StringBuilder sb = new StringBuilder();
+        for (Task task : tasks) {
+            sb.append(task.toFileFormat()).append(System.lineSeparator());
+        }
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
         String str = "";
