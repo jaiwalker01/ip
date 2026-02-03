@@ -1,3 +1,14 @@
+package protagonist.control;
+
+import protagonist.exception.ProtagonistException;
+import protagonist.exception.UnknownCommandException;
+import protagonist.task.Deadline;
+import protagonist.task.Event;
+import protagonist.task.Task;
+import protagonist.task.ToDo;
+import protagonist.io.Ui;
+import protagonist.task.TaskList;
+
 /*
  * Takes in a string input and gives out the correct command.
  */
@@ -9,7 +20,7 @@ public class Parser {
         String trimmedInput = input.trim();
 
         if (trimmedInput.isEmpty()) {
-            throw new ProtagonistException("Command cannot be empty.");
+            throw new ProtagonistException("protagonist.control.Command cannot be empty.");
         }
 
         String[] parts = trimmedInput.split("\\s+");

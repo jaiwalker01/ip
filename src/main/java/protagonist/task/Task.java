@@ -1,3 +1,5 @@
+package protagonist.task;
+
 public class Task {
 
     private final String rawString;
@@ -11,21 +13,27 @@ public class Task {
     public void setNum(int k){
         this.number = k;
     }
+
     public int getNumber(){
         return this.number;
     }
+
     public String getName(){
         return this.rawString;
     }
+
     public void taskDone(){
         isDone = true;
     }
+
     public void taskNotDone(){
         isDone = false;
     }
+
     public boolean taskStatus(){
         return isDone;
     }
+
     public String toFileFormat() {
         // T | <0/1> | <name>
         String done = isDone ? "1" : "0";

@@ -1,3 +1,10 @@
+package protagonist;
+
+import protagonist.control.*;
+import protagonist.exception.*;
+import protagonist.task.*;
+import protagonist.io.*;
+
 import java.util.Scanner;
 
 public class Protagonist {

@@ -1,3 +1,10 @@
+package protagonist.control;
+
+import protagonist.task.TaskList;
+import protagonist.io.Ui;
+import protagonist.exception.ProtagonistException;
+import protagonist.task.Task;
+
 public class Command {
     public static void hi() {
         Ui.greeting();
