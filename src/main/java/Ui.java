@@ -70,7 +70,7 @@ public class Ui {
     }
 
     public static void deleteTaskMsg() {
-        System.out.println("Gone. One less thing to track\nRemoved:");
+        System.out.println("Gone. One less thing to track\nRemoved:\n");
     }
 
     public static void showAdd(Task task, int totalTasks) {

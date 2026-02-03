@@ -5,8 +5,8 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task{
 
-    private String description;
-    private String rawTime;
+    private final String description;
+    private final String rawTime;
     private LocalDate date;
     private LocalDateTime dateTime;
 
@@ -64,20 +64,22 @@ public class Deadline extends Task{
         return date.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
     }
 
+    public String getRawTime() {
+        return rawTime;
+    }
+
     @Override
     public String toFileFormat() {
         // T | <0/1> | <name>
         String done = this.taskStatus() ? "1" : "0";
-        return "D | " + done + " | " + this.getDescription() + " | " + this.getDeadline();
+        return "D | " + done + " | " + this.getDescription() + " | " + this.getRawTime();
     }
 
     @Override
     public String toString() {
         String str = (this.taskStatus()) ? "X" : " ";
-        String time = this.getDeadline();
 
-
-        return "[D][" + str + "] " + description + " (by: " + time + ")";
+        return "[D][" + str + "] " + description + " (by: " + this.getDeadline() + ")";
     }
 
 
