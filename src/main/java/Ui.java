@@ -12,7 +12,7 @@ public class Ui {
     }
 
     public static void genericListMsg(){
-        System.out.println("Status report: here's your current run:\n");
+        System.out.println("Status report. Here's your current run:\n");
     }
 
     public static void mark(TaskList tasklist, int index){
