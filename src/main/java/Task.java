@@ -1,4 +1,5 @@
 public class Task {
+
     private final String rawString;
     private int number;
     private boolean isDone = false;
