@@ -1,9 +1,11 @@
+package protagonist.task;
+
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     private final String description;
     private final String rawTime;

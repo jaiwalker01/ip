@@ -1,3 +1,12 @@
+package protagonist.io;
+
+import protagonist.exception.ProtagonistException;
+import protagonist.task.Deadline;
+import protagonist.task.Event;
+import protagonist.task.Task;
+import protagonist.task.ToDo;
+import protagonist.task.TaskList;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
@@ -10,7 +19,7 @@ public class Storage {
 
     /**
      * Loads tasks from disk
-     * Returns empty TaskList is the file doesn't exist
+     * Returns empty protagonist.task.TaskList is the file doesn't exist
      */
     public static TaskList load() throws ProtagonistException {
         TaskList taskList = new TaskList();
@@ -31,7 +40,7 @@ public class Storage {
                     Task task = parseLine(line);
                     taskList.add(task);
                 } catch (ProtagonistException e) {
-                    continue;
+                    // ignore
                 }
             }
         } catch (IOException e) {
