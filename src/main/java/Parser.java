@@ -21,6 +21,14 @@ public class Parser {
                 Command.bye();
                 return false;
 
+            case "\\help":
+                Ui.helpCommand();
+                return true;
+
+            case "\\task":
+                Ui.showTaskUsage();
+                return true;
+
             case "list":
                 Command.printList(tasklist);
                 return true;

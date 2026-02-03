@@ -53,7 +53,7 @@ public class Deadline extends Task{
      *  to formatted dateTime  11 September 2001, 3:00 pm
     */
     public String convertDateTime(LocalDateTime dateTime) {
-        return dateTime.format(DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a"));
+        return dateTime.format(DateTimeFormatter.ofPattern("d MMMM yyyy h:mm a"));
     }
 
     /**
