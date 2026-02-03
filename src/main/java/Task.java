@@ -1,10 +1,10 @@
 public class Task {
-    private final String name;
+    private final String rawString;
     private int number;
     private boolean isDone = false;
 
-    public Task(String name){
-        this.name = name;
+    public Task(String rawString){
+        this.rawString = rawString;
     }
 
     public void setNum(int k){
@@ -14,7 +14,7 @@ public class Task {
         return this.number;
     }
     public String getName(){
-        return this.name;
+        return this.rawString;
     }
     public void taskDone(){
         isDone = true;
@@ -28,13 +28,13 @@ public class Task {
     public String toFileFormat() {
         // T | <0/1> | <name>
         String done = isDone ? "1" : "0";
-        return "T | " + done + " | " + name;
+        return "T | " + done + " | " + rawString;
     }
 
     @Override
     public String toString() {
         String str = (this.taskStatus()) ? "X" : " ";
-        return "[" + str + "] " + name;
+        return "[" + str + "] " + rawString;
     }
 
 }

@@ -46,12 +46,18 @@ public class TaskList {
 
     @Override
     public String toString() {
-        String str = "";
+        StringBuilder sb = new StringBuilder();
 
-        for (Task task: tasks) {
-            str +=  task.getNumber() + "." + task.toString() + "\n";
+        for (Task task : tasks) {
+            if (!sb.isEmpty()) {
+                sb.append("\n");
+            }
+            sb.append(task.getNumber())
+                    .append(".")
+                    .append(task);
         }
 
-        return str;
+        return sb.toString();
     }
+
 }

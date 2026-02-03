@@ -1,6 +1,6 @@
 public class Ui {
     public static void line() {
-        line("=", 40);
+        line("=", 50);
     }
 
     public static void line(String text, int num){
@@ -12,7 +12,7 @@ public class Ui {
     }
 
     public static void genericListMsg(){
-        System.out.println("Status report: here's your current run:\n");
+        System.out.println("Status report. Here's your current run:\n");
     }
 
     public static void mark(TaskList tasklist, int index){
@@ -55,10 +55,10 @@ public class Ui {
                         "╚═╝     ╚═╝  ╚═╝ ╚═════╝    ╚═╝   \n" +
                         "───── P R O T A G O N I S T ──────\n" +
                         "     your tasks, your story\n\n" +
-                        "Status check. What's the objective?"
+                        "Status check. What's the objective?\n\n" +
+                        "(type \\help to see available commands)\n"
         );
 
-        line(".", 35);
         emptyLine();
     }
 
@@ -70,7 +70,7 @@ public class Ui {
     }
 
     public static void deleteTaskMsg() {
-        System.out.println("Gone. One less thing to track\nRemoved:");
+        System.out.println("Gone. One less thing to track\nRemoved:\n");
     }
 
     public static void showAdd(Task task, int totalTasks) {
@@ -89,16 +89,46 @@ public class Ui {
     public static void unknownCommand(String input){
         emptyLine();
         line();
-        System.out.println("Unknown command: " + input +
-                "\n\nPlease try using one of the following commands:" +
-                "\ntodo <task>                     --> to log generic tasks to do" +
-                "\ndeadline <task> /by <time/date> --> to log tasks with deadlines" +
-                "\nevent <task> /from <start time/date> /to <end time/date> --> self-explanatory" +
-                "\nlist                            --> to list all tasks" +
-                "\nmark <task no.>                 --> to mark a task as done" +
-                "\nunmark <task no.>               --> to mark a task as NOT done" +
-                "\ndelete <task no.>               --> to delete a task" +
-                "\nbye                             --> to exit the chat");
+        System.out.println("Unknown command: " + input + "\n\n" +
+                "Please try using one of the following commands:\n\n" +
+                "\\task     --> show all task commands\n" +
+                "\\help     --> access available commands"
+        );
+        line();
+    }
+
+    public static void helpCommand(){
+        emptyLine();
+        line();
+        System.out.println(
+                "Available commands:\n\n" +
+                "\\task              --> show all task commands\n\n" +
+                "list               --> list all tasks\n" +
+                "mark <task no.>    --> mark a task as done\n" +
+                "unmark <task no.>  --> mark a task as NOT done\n" +
+                "delete <task no.>  --> delete a task\n" +
+                "bye                --> exit the chat");
+        line();
+    }
+
+    public static void showTaskUsage(){
+        emptyLine();
+        line();
+        System.out.println("ToDo Task (generic task to do, no timing to follow)\n" +
+                "Usage --> todo <name of task> \n\n" +
+
+                "Deadline Task (task with a specific deadline)\n" +
+                "Usage --> deadline <name of task> /by <time>\n\n" +
+
+                "Event Task (task with a specific start and end)\n" +
+                "Usage --> event <name of task> /from <start time> /to <end time>\n\n" +
+
+                "<time> format:\n" +
+                "(following formats are parsed, others are kept as entered)\n\n" +
+                "YYYY-MM-DDThh:mm (e.g. 2026-01-19T14:20) --> 19 Jan 2026 2:20pm\n" +
+                "OR\n" +
+                "YYYY-MM-DD       (e.g. 2026-01-19)       --> 19 Jan 2026"
+                );
         line();
     }
 
