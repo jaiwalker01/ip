@@ -7,6 +7,10 @@ import protagonist.io.*;
 
 import java.util.Scanner;
 
+/**
+ * Protagonist ChatBot
+ * (main file to be run)
+ */
 public class Protagonist {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

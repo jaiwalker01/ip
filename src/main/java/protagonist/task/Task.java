@@ -1,5 +1,9 @@
 package protagonist.task;
 
+/**
+ * Task to be completed
+ * to be marked as done or undone
+ */
 public class Task {
 
     private final String rawString;

@@ -12,6 +12,13 @@ import java.io.IOException;
 import java.io.FileWriter;
 import java.util.Scanner;
 
+/**
+ *
+ * Local storage of the task list
+ * Loads from storage to terminal
+ * Stores to storage from terminal
+ *
+ */
 public class Storage {
 
     private static final String DIR_NAME = "data";
@@ -53,7 +60,6 @@ public class Storage {
     /**
      * Saves all tasks to the disk by overwriting the file
      */
-
     public static void saveToFile(TaskList taskList) throws ProtagonistException {
         File dir = new File(DIR_NAME);
         if (!dir.exists()) {
@@ -67,6 +73,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Takes an input in the format of the taskList that is stored in the storage file.
+     * Return the task created by the input.
+     *
+     * @param line is each line on the storage file containing the taskList
+     * @return {@link Task}  is the task created 'line'.
+     * @throws ProtagonistException
+     */
     private static Task parseLine(String line) throws ProtagonistException {
         String[] parts = line.split("\\s*\\|\\s*");
 

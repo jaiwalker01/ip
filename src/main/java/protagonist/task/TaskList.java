@@ -3,6 +3,9 @@ package protagonist.task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * List of {@link Task}
+ */
 public class TaskList {
     private final List<Task> tasks;
 
