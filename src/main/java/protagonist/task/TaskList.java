@@ -65,4 +65,14 @@ public class TaskList {
         return sb.toString();
     }
 
+    public TaskList findByKeyword(String keyword) {
+        TaskList temporaryTaskList = new TaskList();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                temporaryTaskList.add(task);
+            }
+        }
+        return temporaryTaskList;
+    }
+
 }

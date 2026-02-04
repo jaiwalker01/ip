@@ -35,6 +35,7 @@ public class Deadline extends Task {
         }
     }
 
+    @Override
     public String getDescription() {
         return description;
     }

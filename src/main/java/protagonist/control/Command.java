@@ -13,9 +13,11 @@ public class Command {
     public static void hi() {
         Ui.greeting();
     }
+
     public static void bye() {
         Ui.goodbye();
     }
+
     public static void printList(TaskList tasklist) {
         Ui.emptyLine();
         Ui.line();
@@ -23,6 +25,7 @@ public class Command {
         System.out.println(tasklist);
         Ui.line();
     }
+
     public static void mark(TaskList tasklist, String maybeIndex)
             throws ProtagonistException {
         int index;
@@ -40,6 +43,7 @@ public class Command {
         tasklist.doTask(index);
         Ui.mark(tasklist, index);
     }
+
     public static void unmark(TaskList tasklist, String maybeIndex)
             throws ProtagonistException {
 
@@ -56,7 +60,7 @@ public class Command {
 
         tasklist.undoTask(index);
         Ui.unMark(tasklist, index);
-}
+    }
 
     public static void delete(TaskList tasklist, String index)
             throws ProtagonistException {
@@ -79,7 +83,23 @@ public class Command {
         Ui.deleteTaskMsg();
         Ui.printTask(task);
         Ui.numOfTasks(tasklist);
-        Ui.emptyLine();
         Ui.line();
+    }
+
+    public static void findTasksInTaskList(String keyword, TaskList taskList)
+            throws ProtagonistException {
+
+        if (keyword == null || keyword.trim().isEmpty()) {
+            throw new ProtagonistException("Usage: find <keyword>");
+        }
+
+        TaskList filtered = taskList.findByKeyword(keyword);
+
+        if (filtered.size() == 0) {
+            Ui.cannotFindTasks(keyword);
+            return;
+        }
+
+        Ui.canFindTasks(keyword, filtered);
     }
 }

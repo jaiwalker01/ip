@@ -22,7 +22,7 @@ public class Task {
         return this.number;
     }
 
-    public String getName(){
+    public String getDescription(){
         return this.rawString;
     }
 

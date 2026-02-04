@@ -84,24 +84,24 @@ public class Ui {
      * Prints the greeting message for Protagonist
      */
     public static void greeting() {
-        line(".", 35);
-        emptyLine();
+        line(".", 44);
         System.out.println(
-                """
-                        ██████╗ ██████╗  ██████╗ ████████╗
-                        ██╔══██╗██╔══██╗██╔═══██╗╚══██╔══╝
-                        ██████╔╝██████╔╝██║   ██║   ██║  \s
-                        ██╔═══╝ ██╔══██╗██║   ██║   ██║  \s
-                        ██║     ██║  ██║╚██████╔╝   ██║  \s
-                        ╚═╝     ╚═╝  ╚═╝ ╚═════╝    ╚═╝  \s
-                        ───── P R O T A G O N I S T ──────
-                             your tasks, your story
-                        
-                        Status check. What's the objective?
-                        
-                        (type \\help to see available commands)
-                        """
+                          "          ____  ____   ___ _____  \n"
+                        + "         |  _ \\|  _ \\ / _ \\_   _| \n"
+                        + "         | |_) | |_) | | | || |   \n"
+                        + "         |  __/|  _ <| |_| || |   \n"
+                        + "         |_|   |_| \\_\\\\___/ |_|   \n"
+                        + "-------------------------------------------\n"
+                        + "         P R O T A G O N I S T\n"
+                        + "         your tasks, your story\n"
+                        + "-------------------------------------------\n"
+                        + "\n"
+                        + "Status check. What's the objective?\n"
+                        + "\n"
+                        + "(type \\help to see available commands)\n"
         );
+
+
 
         emptyLine();
     }
@@ -146,6 +146,24 @@ public class Ui {
         System.out.println(task);
     }
 
+
+    public static void canFindTasks(String keyword, TaskList tasklist) {
+        emptyLine();
+        line();
+        System.out.println("Target Acquired. Matching tasks: \n");
+        System.out.println(tasklist);
+        line();
+    }
+
+    public static void cannotFindTasks(String keyword) {
+        emptyLine();
+        line();
+        System.out.println("Objective not found. No tasks containing: " + keyword +
+                "\nTry a different keyword.");
+        line();
+
+    }
+
     /**
      * Prints error for unknown command
      * @param input user input (unknown command)
@@ -174,6 +192,7 @@ public class Ui {
                         \\task              --> show all task commands
                         
                         list               --> list all tasks
+                        find <keyword>     --> find task containing <keyword>
                         mark <task no.>    --> mark a task as done
                         unmark <task no.>  --> mark a task as NOT done
                         delete <task no.>  --> delete a task
@@ -208,13 +227,13 @@ public class Ui {
     }
 
     /**
-     * Prints an ❌ with the input message (usually an Error message)
+     * Prints an [ERROR] with the input message (usually an Error message)
      * @param msg error message to be printed
      */
     public static void showError(String msg) {
         emptyLine();
         line();
-        System.out.println("❌ " + msg);
+        System.out.println("[ERROR] " + msg);
         line();
     }
 

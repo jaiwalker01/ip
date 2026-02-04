@@ -21,7 +21,7 @@ public class Parser {
         String trimmedInput = input.trim();
 
         if (trimmedInput.isEmpty()) {
-            throw new ProtagonistException("protagonist.control.Command cannot be empty.");
+            throw new ProtagonistException("Command cannot be empty.");
         }
 
         String[] parts = trimmedInput.split("\\s+");
@@ -43,6 +43,10 @@ public class Parser {
 
         case "list":
             Command.printList(tasklist);
+            return true;
+
+        case "find":
+            Command.findTasksInTaskList(combine(parts,1,parts.length - 1), tasklist);
             return true;
 
         case "mark":
