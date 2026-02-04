@@ -32,10 +32,16 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "protagonist"
     archiveClassifier = null
 }
 
 run {
     standardInput = System.in
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
