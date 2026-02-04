@@ -9,8 +9,9 @@ import protagonist.task.ToDo;
 import protagonist.io.Ui;
 import protagonist.task.TaskList;
 
-/*
- * Takes in a string input and gives out the correct command.
+/**
+ * Parses user input and dispatches commands that operate on the {@link TaskList}.
+ * Validates command format and throws a {@link ProtagonistException} for invalid inputs.
  */
 public class Parser {
 

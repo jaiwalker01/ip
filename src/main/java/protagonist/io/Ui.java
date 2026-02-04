@@ -3,19 +3,39 @@ package protagonist.io;
 import protagonist.task.Task;
 import protagonist.task.TaskList;
 
+/**
+ * Prints messages and error messages according to taskList or task inputs
+ */
 public class Ui {
+
+    /**
+     * Prints a line of repeated characters
+     */
     public static void line() {
         line("=", 50);
     }
 
+    /**
+     * Prints a line of repeated characters specified by input
+     * @param text character to be repeated
+     * @param num number of repetitions
+     */
     public static void line(String text, int num){
         System.out.println(String.valueOf(text).repeat(Math.max(0, num)));
     }
 
+    /**
+     * Prints a message to indicate that the task list is printed
+     */
     public static void genericListMsg(){
         System.out.println("Status report. Here's your current run:\n");
     }
 
+    /**
+     * Prints the 'marked task' message
+     * @param tasklist input task list
+     * @param index index number of task to be marked
+     */
     public static void mark(TaskList tasklist, int index){
         Task task = tasklist.getTask(index);
         emptyLine();
@@ -24,6 +44,11 @@ public class Ui {
         line();
     }
 
+    /**
+     * Prints the 'unmarked task' message
+     * @param tasklist input task list
+     * @param index index number of task to be unmarked
+     */
     public static void unMark(TaskList tasklist, int index){
         Task task = tasklist.getTask(index);
         emptyLine();
@@ -32,18 +57,32 @@ public class Ui {
         line();
     }
 
+    /**
+     * Prints number of tasks left
+     * @param tasklist input task list
+     */
     public static void numOfTasks(TaskList tasklist) {
         System.out.println("You have " + tasklist.size() + " tasks left in the list");
     }
 
+    /**
+     * Prints an 'added task' message
+     */
     public static void addedTaskMsg(){
         System.out.println("Objective recorded. We'll keep the timeline stable.\nAdded:\n");
     }
 
+    /**
+     * Prints an empty line.
+     * Equivalent to {@code System.out.println()}
+     */
     public static void emptyLine() {
         System.out.println();
     }
 
+    /**
+     * Prints the greeting message for Protagonist
+     */
     public static void greeting() {
         line(".", 35);
         emptyLine();
@@ -67,6 +106,9 @@ public class Ui {
         emptyLine();
     }
 
+    /**
+     * Prints the goodbye message for Protagonist
+     */
     public static void goodbye() {
         emptyLine();
         line();
@@ -74,10 +116,19 @@ public class Ui {
         line();
     }
 
+    /**
+     * Prints the 'delete task' message
+     */
     public static void deleteTaskMsg() {
         System.out.println("Gone. One less thing to track\nRemoved:\n");
     }
 
+    /**
+     * Prints the 'added task' message.
+     * Prints how many tasks are left in task list.
+     * @param task the task that is added
+     * @param totalTasks number of tasks left in task list
+     */
     public static void showAdd(Task task, int totalTasks) {
         emptyLine();
         line();
@@ -87,10 +138,18 @@ public class Ui {
         line();
     }
 
+    /**
+     * Prints the {@code toString()} format of task
+     * @param task task to be printed
+     */
     public static void printTask(Task task) {
         System.out.println(task);
     }
 
+    /**
+     * Prints error for unknown command
+     * @param input user input (unknown command)
+     */
     public static void unknownCommand(String input){
         emptyLine();
         line();
@@ -102,6 +161,9 @@ public class Ui {
         line();
     }
 
+    /**
+     * Prints guide for command usage
+     */
     public static void helpCommand(){
         emptyLine();
         line();
@@ -119,6 +181,9 @@ public class Ui {
         line();
     }
 
+    /**
+     * Prints guide for task usage
+     */
     public static void showTaskUsage(){
         emptyLine();
         line();
@@ -142,6 +207,10 @@ public class Ui {
         line();
     }
 
+    /**
+     * Prints an ❌ with the input message (usually an Error message)
+     * @param msg error message to be printed
+     */
     public static void showError(String msg) {
         emptyLine();
         line();

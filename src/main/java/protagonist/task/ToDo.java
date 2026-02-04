@@ -1,5 +1,8 @@
 package protagonist.task;
 
+/**
+ * Tasks with no specific timing
+ */
 public class ToDo extends Task {
     public ToDo(String description){
         super(description);

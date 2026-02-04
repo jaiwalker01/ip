@@ -5,6 +5,10 @@ import protagonist.io.Ui;
 import protagonist.exception.ProtagonistException;
 import protagonist.task.Task;
 
+/**
+ * Executes command instructions  {@link Parser}.
+ * Validates indexing of {@link TaskList} and throws a {@link ProtagonistException} for invalid indexes.
+ */
 public class Command {
     public static void hi() {
         Ui.greeting();
