@@ -20,7 +20,7 @@ public class Parser {
         String trimmedInput = input.trim();
 
         if (trimmedInput.isEmpty()) {
-            throw new ProtagonistException("protagonist.control.Command cannot be empty.");
+            throw new ProtagonistException("Command cannot be empty.");
         }
 
         String[] parts = trimmedInput.split("\\s+");
@@ -28,56 +28,60 @@ public class Parser {
 
         switch (commandString) {
 
-            case "bye":
-                Command.bye();
-                return false;
+        case "bye":
+            Command.bye();
+            return false;
 
-            case "\\help":
-                Ui.helpCommand();
-                return true;
+        case "\\help":
+            Ui.helpCommand();
+            return true;
 
-            case "\\task":
-                Ui.showTaskUsage();
-                return true;
+        case "\\task":
+            Ui.showTaskUsage();
+            return true;
 
-            case "list":
-                Command.printList(tasklist);
-                return true;
+        case "list":
+            Command.printList(tasklist);
+            return true;
 
-            case "mark":
-                requireExactArgs(parts, 2, "mark <task number>");
-                Command.mark(tasklist, parts[1]);
-                return true;
+        case "find":
+            Command.findTasksInTaskList(combine(parts,1,parts.length - 1), tasklist);
+            return true;
 
-            case "unmark":
-                requireExactArgs(parts, 2, "unmark <task number>");
-                Command.unmark(tasklist, parts[1]);
-                return true;
+        case "mark":
+            requireExactArgs(parts, 2, "mark <task number>");
+            Command.mark(tasklist, parts[1]);
+            return true;
 
-            case "delete":
-                requireExactArgs(parts, 2, "delete <task number>");
-                Command.delete(tasklist, parts[1]);
-                return true;
+        case "unmark":
+            requireExactArgs(parts, 2, "unmark <task number>");
+            Command.unmark(tasklist, parts[1]);
+            return true;
 
-            case "todo":
-                if (parts.length < 2) {
-                    throw new ProtagonistException("Usage: todo <description>");
-                }
+        case "delete":
+            requireExactArgs(parts, 2, "delete <task number>");
+            Command.delete(tasklist, parts[1]);
+            return true;
 
-                String todoDesc = combine(parts, 1, parts.length - 1);
-                Task todo = new ToDo(todoDesc);
-                tasklist.add(todo);
-                Ui.showAdd(todo, tasklist.size());
-                return true;
+        case "todo":
+            if (parts.length < 2) {
+                throw new ProtagonistException("Usage: todo <description>");
+            }
 
-            case "deadline":
-                return parseDeadline(parts, input, tasklist);
+            String todoDesc = combine(parts, 1, parts.length - 1);
+            Task todo = new ToDo(todoDesc);
+            tasklist.add(todo);
+            Ui.showAdd(todo, tasklist.size());
+            return true;
 
-            case "event":
-                return parseEvent(parts, input, tasklist);
+        case "deadline":
+            return parseDeadline(parts, input, tasklist);
 
-            default:
-                throw new UnknownCommandException(input);
+        case "event":
+            return parseEvent(parts, input, tasklist);
+
+        default:
+            throw new UnknownCommandException(input);
         }
     }
 

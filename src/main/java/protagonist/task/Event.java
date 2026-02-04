@@ -53,6 +53,7 @@ public class Event extends Task {
         }
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
