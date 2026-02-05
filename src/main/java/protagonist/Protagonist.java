@@ -1,11 +1,16 @@
 package protagonist;
 
-import protagonist.control.*;
-import protagonist.exception.*;
-import protagonist.task.*;
-import protagonist.io.*;
-
 import java.util.Scanner;
+
+import protagonist.control.Command;
+import protagonist.control.Parser;
+import protagonist.exception.ProtagonistException;
+import protagonist.exception.UnknownCommandException;
+import protagonist.io.Storage;
+import protagonist.io.Ui;
+import protagonist.task.TaskList;
+
+
 
 /**
  * Protagonist ChatBot
@@ -26,7 +31,7 @@ public class Protagonist {
 
         Command.hi();
 
-        while(isRunning) {
+        while (isRunning) {
             try {
                 String input = scanner.nextLine();
                 isRunning = Parser.parse(input, tasklist);

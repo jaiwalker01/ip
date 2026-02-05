@@ -1,9 +1,9 @@
 package protagonist.control;
 
-import protagonist.task.TaskList;
-import protagonist.io.Ui;
 import protagonist.exception.ProtagonistException;
+import protagonist.io.Ui;
 import protagonist.task.Task;
+import protagonist.task.TaskList;
 
 /**
  * Executes command instructions  {@link Parser}.
@@ -18,6 +18,10 @@ public class Command {
         Ui.goodbye();
     }
 
+    /**
+     * Prints the tasks in the task list
+     * @param tasklist
+     */
     public static void printList(TaskList tasklist) {
         Ui.emptyLine();
         Ui.printLine();
@@ -26,6 +30,12 @@ public class Command {
         Ui.printLine();
     }
 
+    /**
+     * Marks a task from task list
+     * @param tasklist
+     * @param maybeIndex index of task to be marked
+     * @throws ProtagonistException
+     */
     public static void mark(TaskList tasklist, String maybeIndex)
             throws ProtagonistException {
         int index;
@@ -44,6 +54,12 @@ public class Command {
         Ui.mark(tasklist, index);
     }
 
+    /**
+     * Unmarks a task from task list
+     * @param tasklist
+     * @param maybeIndex index of task to be unmarked
+     * @throws ProtagonistException
+     */
     public static void unmark(TaskList tasklist, String maybeIndex)
             throws ProtagonistException {
 
@@ -62,7 +78,14 @@ public class Command {
         Ui.unMark(tasklist, index);
     }
 
-    public static void delete(TaskList tasklist, String index)
+    /**
+     * Deletes task with the given index number if possible.
+     * If index number is invalid, error is thrown
+     * @param tasklist
+     * @param index index of task to be deleted
+     * @throws ProtagonistException
+     */
+    public static void deleteTask(TaskList tasklist, String index)
             throws ProtagonistException {
 
         int i;
@@ -86,6 +109,12 @@ public class Command {
         Ui.printLine();
     }
 
+    /**
+     * Finds tasks in the list with matching keyword
+     * @param keyword String input
+     * @param taskList task list of user
+     * @throws ProtagonistException
+     */
     public static void findTasksInTaskList(String keyword, TaskList taskList)
             throws ProtagonistException {
 

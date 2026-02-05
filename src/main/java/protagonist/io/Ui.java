@@ -20,14 +20,14 @@ public class Ui {
      * @param text character to be repeated
      * @param num number of repetitions
      */
-    public static void printLine(String text, int num){
+    public static void printLine(String text, int num) {
         System.out.println(String.valueOf(text).repeat(Math.max(0, num)));
     }
 
     /**
      * Prints a message to indicate that the task list is printed
      */
-    public static void printGenericListMessage(){
+    public static void printGenericListMessage() {
         System.out.println("Status report. Here's your current run:\n");
     }
 
@@ -36,7 +36,7 @@ public class Ui {
      * @param tasklist input task list
      * @param index index number of task to be marked
      */
-    public static void mark(TaskList tasklist, int index){
+    public static void mark(TaskList tasklist, int index) {
         Task task = tasklist.getTask(index);
         emptyLine();
         printLine();
@@ -49,7 +49,7 @@ public class Ui {
      * @param tasklist input task list
      * @param index index number of task to be unmarked
      */
-    public static void unMark(TaskList tasklist, int index){
+    public static void unMark(TaskList tasklist, int index) {
         Task task = tasklist.getTask(index);
         emptyLine();
         printLine();
@@ -68,7 +68,7 @@ public class Ui {
     /**
      * Prints an 'added task' message
      */
-    public static void addedTaskMsg(){
+    public static void addedTaskMsg() {
         System.out.println("Objective recorded. We'll keep the timeline stable.\nAdded:\n");
     }
 
@@ -146,7 +146,11 @@ public class Ui {
         System.out.println(task);
     }
 
-
+    /**
+     * Prints list of tasks that match the input keyword
+     * @param keyword input to search for task
+     * @param tasklist task list of user
+     */
     public static void printCanFindTasks(String keyword, TaskList tasklist) {
         emptyLine();
         printLine();
@@ -155,11 +159,15 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Prints error when 0 tasks are found
+     * @param keyword input to search for task
+     */
     public static void printCannotFindTasks(String keyword) {
         emptyLine();
         printLine();
-        System.out.println("Objective not found. No tasks containing: " + keyword +
-                "\nTry a different keyword.");
+        System.out.println("Objective not found. No tasks containing: " + keyword
+                + "\nTry a different keyword.");
         printLine();
 
     }
@@ -168,13 +176,15 @@ public class Ui {
      * Prints error for unknown command
      * @param input user input (unknown command)
      */
-    public static void unknownCommand(String input){
+    public static void unknownCommand(String input) {
         emptyLine();
         printLine();
-        System.out.println("Unknown command: " + input + "\n\n" +
-                "Please try using one of the following commands:\n\n" +
-                "\\task     --> show all task commands\n" +
-                "\\help     --> access available commands"
+        System.out.println("Unknown command: "
+                + input
+                + "\n\n"
+                + "Please try using one of the following commands:\n\n"
+                + "\\task     --> show all task commands\n"
+                + "\\help     --> access available commands"
         );
         printLine();
     }
@@ -182,49 +192,50 @@ public class Ui {
     /**
      * Prints guide for command usage
      */
-    public static void helpCommand(){
+    public static void helpCommand() {
         emptyLine();
         printLine();
-        System.out.println(
-                """
-                        Available commands:
-                        
-                        \\task              --> show all task commands
-                        
-                        list               --> list all tasks
-                        find <keyword>     --> find task containing <keyword>
-                        mark <task no.>    --> mark a task as done
-                        unmark <task no.>  --> mark a task as NOT done
-                        delete <task no.>  --> delete a task
-                        bye                --> exit the chat""");
+        System.out.println("""
+            Available commands:
+
+            \\task              --> show all task commands
+
+            list               --> list all tasks
+            find <keyword>     --> find task containing <keyword>
+            mark <task no.>    --> mark a task as done
+            unmark <task no.>  --> mark a task as NOT done
+            delete <task no.>  --> delete a task
+            bye                --> exit the chat
+            """);
         printLine();
     }
 
     /**
      * Prints guide for task usage
      */
-    public static void showTaskUsage(){
+    public static void showTaskUsage() {
         emptyLine();
         printLine();
         System.out.println("""
-                        protagonist.task.ToDo protagonist.task.Task (generic task to do, no timing to follow)
-                        Usage --> todo <name of task>\s
-                        
-                        protagonist.task.Deadline protagonist.task.Task (task with a specific deadline)
-                        Usage --> deadline <name of task> /by <time>
-                        
-                        protagonist.task.Event protagonist.task.Task (task with a specific start and end)
-                        Usage --> event <name of task> /from <start time> /to <end time>
-                        
-                        <time> format:
-                        (following formats are parsed, others are kept as entered)
-                        
-                        YYYY-MM-DDThh:mm (e.g. 2026-01-19T14:20) --> 19 Jan 2026 2:20pm
-                        OR
-                        YYYY-MM-DD       (e.g. 2026-01-19)       --> 19 Jan 2026"""
-                );
+            protagonist.task.ToDo protagonist.task.Task (generic task to do, no timing to follow)
+            Usage --> todo <name of task>
+
+            protagonist.task.Deadline protagonist.task.Task (task with a specific deadline)
+            Usage --> deadline <name of task> /by <time>
+
+            protagonist.task.Event protagonist.task.Task (task with a specific start and end)
+            Usage --> event <name of task> /from <start time> /to <end time>
+
+            <time> format:
+            (following formats are parsed, others are kept as entered)
+
+            YYYY-MM-DDThh:mm (e.g. 2026-01-19T14:20) --> 19 Jan 2026 2:20pm
+            OR
+            YYYY-MM-DD       (e.g. 2026-01-19)       --> 19 Jan 2026
+            """);
         printLine();
     }
+
 
     /**
      * Prints an [ERROR] with the input message (usually an Error message)

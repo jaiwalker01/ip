@@ -1,19 +1,18 @@
 package protagonist.io;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
 import protagonist.exception.ProtagonistException;
 import protagonist.task.Deadline;
 import protagonist.task.Event;
 import protagonist.task.Task;
-import protagonist.task.ToDo;
 import protagonist.task.TaskList;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
-import java.util.Scanner;
+import protagonist.task.ToDo;
 
 /**
- *
  * Local storage of the task list
  * Loads from storage to terminal
  * Stores to storage from terminal
@@ -36,7 +35,7 @@ public class Storage {
             return taskList;
         }
 
-        try (Scanner scanner = new Scanner(file)){
+        try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
                 if (line.isEmpty()) {
@@ -95,26 +94,26 @@ public class Storage {
         Task task;
 
         switch (type) {
-            case "T":
-                task = new ToDo(description);
-                break;
+        case "T":
+            task = new ToDo(description);
+            break;
 
-            case "D":
-                if (parts.length < 4) {
-                    throw new ProtagonistException("Invalid data entry: " + line);
-                }
-                task = new Deadline(description, description, parts[3]);
-                break;
+        case "D":
+            if (parts.length < 4) {
+                throw new ProtagonistException("Invalid data entry: " + line);
+            }
+            task = new Deadline(description, description, parts[3]);
+            break;
 
-            case "E":
-                if (parts.length < 5) {
-                    throw new ProtagonistException("Invalid data entry: " + line);
-                }
-                task = new Event(description, description, parts[3], parts[4]);
-                break;
+        case "E":
+            if (parts.length < 5) {
+                throw new ProtagonistException("Invalid data entry: " + line);
+            }
+            task = new Event(description, description, parts[3], parts[4]);
+            break;
 
-            default:
-                throw new ProtagonistException("Unknown task type in file: " + line);
+        default:
+            throw new ProtagonistException("Unknown task type in file: " + line);
         }
 
         if (isDone) {

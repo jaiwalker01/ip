@@ -9,26 +9,30 @@ public class Task {
     private final String rawString;
     private boolean isDone = false;
 
-    public Task(String rawString){
+    public Task(String rawString) {
         this.rawString = rawString;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return this.rawString;
     }
 
-    public void taskDone(){
+    public void taskDone() {
         isDone = true;
     }
 
-    public void taskNotDone(){
+    public void taskNotDone() {
         isDone = false;
     }
 
-    public boolean taskStatus(){
+    public boolean taskStatus() {
         return isDone;
     }
 
+    /**
+     * Converts task representation into a format to be stored in a .txt file
+     * @return the String representation of the to-be-stored format
+     */
     public String toFileFormat() {
         // T | <0/1> | <name>
         String done = isDone ? "1" : "0";

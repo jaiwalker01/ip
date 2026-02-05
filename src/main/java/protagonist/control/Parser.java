@@ -2,12 +2,12 @@ package protagonist.control;
 
 import protagonist.exception.ProtagonistException;
 import protagonist.exception.UnknownCommandException;
+import protagonist.io.Ui;
 import protagonist.task.Deadline;
 import protagonist.task.Event;
 import protagonist.task.Task;
-import protagonist.task.ToDo;
-import protagonist.io.Ui;
 import protagonist.task.TaskList;
+import protagonist.task.ToDo;
 
 /**
  * Parses user input and dispatches commands that operate on the {@link TaskList}.
@@ -15,6 +15,13 @@ import protagonist.task.TaskList;
  */
 public class Parser {
 
+    /**
+     * Association class to parse input to commands
+     * @param input input string
+     * @param tasklist task list of user
+     * @return false to quit program, else always true
+     * @throws ProtagonistException
+     */
     public static boolean parse(String input, TaskList tasklist)
             throws ProtagonistException {
 
@@ -46,7 +53,7 @@ public class Parser {
             return true;
 
         case "find":
-            Command.findTasksInTaskList(combine(parts,1,parts.length - 1), tasklist);
+            Command.findTasksInTaskList(combine(parts, 1, parts.length - 1), tasklist);
             return true;
 
         case "mark":
@@ -61,7 +68,7 @@ public class Parser {
 
         case "delete":
             requireExactArgs(parts, 2, "delete <task number>");
-            Command.delete(tasklist, parts[1]);
+            Command.deleteTask(tasklist, parts[1]);
             return true;
 
         case "todo":
@@ -112,10 +119,10 @@ public class Parser {
         int fromIndex = find(parts, "/from");
         int toIndex = find(parts, "/to");
 
-        if (fromIndex == -1 || toIndex == -1 ||
-                fromIndex == 1 ||
-                fromIndex + 1 >= toIndex ||
-                toIndex == parts.length - 1) {
+        if (fromIndex == -1 || toIndex == -1
+                || fromIndex == 1
+                || fromIndex + 1 >= toIndex
+                || toIndex == parts.length - 1) {
 
             throw new ProtagonistException(
                     "Format mismatch.Try: event <task> /from <start> /to <end>");

@@ -4,7 +4,7 @@ package protagonist.task;
  * Tasks with no specific timing
  */
 public class ToDo extends Task {
-    public ToDo(String description){
+    public ToDo(String description) {
         super(description);
     }
 
@@ -16,7 +16,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + super.toString();
     }
 

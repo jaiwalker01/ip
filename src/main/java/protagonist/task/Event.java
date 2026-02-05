@@ -1,7 +1,7 @@
 package protagonist.task;
 
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -20,7 +20,13 @@ public class Event extends Task {
     private LocalDate endDate;
     private LocalDateTime endDateTime;
 
-
+    /**
+     * Constructs a {@code Event}
+     * @param rawString literal String input from user
+     * @param description name from input
+     * @param rawStartTime start time from input
+     * @param rawEndTime end time from input
+     */
     public Event(String rawString, String description, String rawStartTime, String rawEndTime) {
         super(rawString);
         this.description = description;
@@ -122,7 +128,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String str = (this.taskStatus()) ? "X" : " ";
 
         return "[E][" + str + "] " + description + " (from: " + this.getEventStart()

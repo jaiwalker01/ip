@@ -1,7 +1,7 @@
 package protagonist.task;
 
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -15,6 +15,13 @@ public class Deadline extends Task {
     private LocalDate date;
     private LocalDateTime dateTime;
 
+    /**
+     * Constructs a {@code Deadline}
+     *
+     * @param rawString literal String input from user
+     * @param description deciphered description from input
+     * @param rawTime deciphered time of deadline from input
+     */
     public Deadline(String rawString, String description, String rawTime) {
         super(rawString);
         this.description = description; // description
