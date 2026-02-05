@@ -17,16 +17,12 @@ public class TaskList {
         return tasks.size();
     }
 
-    public void add(Task task){
+    public void addTask(Task task){
         tasks.add(task);
-        task.setNum(tasks.size());
     }
 
     public void removeTask(int index){
         tasks.remove(index);
-        for (int i = index; i < tasks.size(); i++){
-            tasks.get(i).setNum(i + 1); // renumber from index onwards
-        }
     }
 
     public Task getTask(int index){
@@ -53,23 +49,21 @@ public class TaskList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        for (Task task : tasks) {
-            if (!sb.isEmpty()) {
-                sb.append("\n");
-            }
-            sb.append(task.getNumber())
-                    .append(".")
-                    .append(task);
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append(i + 1)
+                    .append(". ")
+                    .append(tasks.get(i))
+                    .append("\n");
         }
 
         return sb.toString();
     }
 
-    public TaskList findByKeyword(String keyword) {
+    public TaskList findTaskByKeyword(String keyword) {
         TaskList temporaryTaskList = new TaskList();
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
-                temporaryTaskList.add(task);
+                temporaryTaskList.addTask(task);
             }
         }
         return temporaryTaskList;

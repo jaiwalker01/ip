@@ -45,7 +45,7 @@ public class Storage {
 
                 try {
                     Task task = parseLine(line);
-                    taskList.add(task);
+                    taskList.addTask(task);
                 } catch (ProtagonistException e) {
                     // ignore
                 }

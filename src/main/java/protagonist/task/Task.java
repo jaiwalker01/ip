@@ -7,19 +7,10 @@ package protagonist.task;
 public class Task {
 
     private final String rawString;
-    private int number;
     private boolean isDone = false;
 
     public Task(String rawString){
         this.rawString = rawString;
-    }
-
-    public void setNum(int k){
-        this.number = k;
-    }
-
-    public int getNumber(){
-        return this.number;
     }
 
     public String getDescription(){

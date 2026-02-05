@@ -20,10 +20,10 @@ public class Command {
 
     public static void printList(TaskList tasklist) {
         Ui.emptyLine();
-        Ui.line();
-        Ui.genericListMsg();
+        Ui.printLine();
+        Ui.printGenericListMessage();
         System.out.println(tasklist);
-        Ui.line();
+        Ui.printLine();
     }
 
     public static void mark(TaskList tasklist, String maybeIndex)
@@ -79,11 +79,11 @@ public class Command {
         Task task = tasklist.getTask(i);
         tasklist.removeTask(i);
         Ui.emptyLine();
-        Ui.line();
+        Ui.printLine();
         Ui.deleteTaskMsg();
         Ui.printTask(task);
         Ui.numOfTasks(tasklist);
-        Ui.line();
+        Ui.printLine();
     }
 
     public static void findTasksInTaskList(String keyword, TaskList taskList)
@@ -93,13 +93,13 @@ public class Command {
             throw new ProtagonistException("Usage: find <keyword>");
         }
 
-        TaskList filtered = taskList.findByKeyword(keyword);
+        TaskList filtered = taskList.findTaskByKeyword(keyword);
 
         if (filtered.size() == 0) {
-            Ui.cannotFindTasks(keyword);
+            Ui.printCannotFindTasks(keyword);
             return;
         }
 
-        Ui.canFindTasks(keyword, filtered);
+        Ui.printCanFindTasks(keyword, filtered);
     }
 }

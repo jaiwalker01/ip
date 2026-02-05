@@ -11,8 +11,8 @@ public class Ui {
     /**
      * Prints a line of repeated characters
      */
-    public static void line() {
-        line("=", 50);
+    public static void printLine() {
+        printLine("=", 50);
     }
 
     /**
@@ -20,14 +20,14 @@ public class Ui {
      * @param text character to be repeated
      * @param num number of repetitions
      */
-    public static void line(String text, int num){
+    public static void printLine(String text, int num){
         System.out.println(String.valueOf(text).repeat(Math.max(0, num)));
     }
 
     /**
      * Prints a message to indicate that the task list is printed
      */
-    public static void genericListMsg(){
+    public static void printGenericListMessage(){
         System.out.println("Status report. Here's your current run:\n");
     }
 
@@ -39,9 +39,9 @@ public class Ui {
     public static void mark(TaskList tasklist, int index){
         Task task = tasklist.getTask(index);
         emptyLine();
-        line();
+        printLine();
         System.out.println("Done. One less loose thread:\n\n" + task.toString());
-        line();
+        printLine();
     }
 
     /**
@@ -52,9 +52,9 @@ public class Ui {
     public static void unMark(TaskList tasklist, int index){
         Task task = tasklist.getTask(index);
         emptyLine();
-        line();
+        printLine();
         System.out.println("Status reverted, we're not done yet:\n\n" + task.toString());
-        line();
+        printLine();
     }
 
     /**
@@ -84,7 +84,7 @@ public class Ui {
      * Prints the greeting message for Protagonist
      */
     public static void greeting() {
-        line(".", 44);
+        printLine(".", 44);
         System.out.println(
                           "          ____  ____   ___ _____  \n"
                         + "         |  _ \\|  _ \\ / _ \\_   _| \n"
@@ -111,9 +111,9 @@ public class Ui {
      */
     public static void goodbye() {
         emptyLine();
-        line();
+        printLine();
         System.out.println("Signing off. May our paths cross again.");
-        line();
+        printLine();
     }
 
     /**
@@ -131,11 +131,11 @@ public class Ui {
      */
     public static void showAdd(Task task, int totalTasks) {
         emptyLine();
-        line();
+        printLine();
         addedTaskMsg();
         System.out.println(task);
         System.out.println("You have " + totalTasks + " tasks in the list");
-        line();
+        printLine();
     }
 
     /**
@@ -147,20 +147,20 @@ public class Ui {
     }
 
 
-    public static void canFindTasks(String keyword, TaskList tasklist) {
+    public static void printCanFindTasks(String keyword, TaskList tasklist) {
         emptyLine();
-        line();
+        printLine();
         System.out.println("Target Acquired. Matching tasks: \n");
         System.out.println(tasklist);
-        line();
+        printLine();
     }
 
-    public static void cannotFindTasks(String keyword) {
+    public static void printCannotFindTasks(String keyword) {
         emptyLine();
-        line();
+        printLine();
         System.out.println("Objective not found. No tasks containing: " + keyword +
                 "\nTry a different keyword.");
-        line();
+        printLine();
 
     }
 
@@ -170,13 +170,13 @@ public class Ui {
      */
     public static void unknownCommand(String input){
         emptyLine();
-        line();
+        printLine();
         System.out.println("Unknown command: " + input + "\n\n" +
                 "Please try using one of the following commands:\n\n" +
                 "\\task     --> show all task commands\n" +
                 "\\help     --> access available commands"
         );
-        line();
+        printLine();
     }
 
     /**
@@ -184,7 +184,7 @@ public class Ui {
      */
     public static void helpCommand(){
         emptyLine();
-        line();
+        printLine();
         System.out.println(
                 """
                         Available commands:
@@ -197,7 +197,7 @@ public class Ui {
                         unmark <task no.>  --> mark a task as NOT done
                         delete <task no.>  --> delete a task
                         bye                --> exit the chat""");
-        line();
+        printLine();
     }
 
     /**
@@ -205,7 +205,7 @@ public class Ui {
      */
     public static void showTaskUsage(){
         emptyLine();
-        line();
+        printLine();
         System.out.println("""
                         protagonist.task.ToDo protagonist.task.Task (generic task to do, no timing to follow)
                         Usage --> todo <name of task>\s
@@ -223,7 +223,7 @@ public class Ui {
                         OR
                         YYYY-MM-DD       (e.g. 2026-01-19)       --> 19 Jan 2026"""
                 );
-        line();
+        printLine();
     }
 
     /**
@@ -232,9 +232,9 @@ public class Ui {
      */
     public static void showError(String msg) {
         emptyLine();
-        line();
+        printLine();
         System.out.println("[ERROR] " + msg);
-        line();
+        printLine();
     }
 
 

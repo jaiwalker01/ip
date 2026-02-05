@@ -71,7 +71,7 @@ public class Parser {
 
             String todoDesc = combine(parts, 1, parts.length - 1);
             Task todo = new ToDo(todoDesc);
-            tasklist.add(todo);
+            tasklist.addTask(todo);
             Ui.showAdd(todo, tasklist.size());
             return true;
 
@@ -100,7 +100,7 @@ public class Parser {
         String by = combine(parts, byIndex + 1, parts.length - 1);
 
         Task deadline = new Deadline(input, desc, by);
-        tasklist.add(deadline);
+        tasklist.addTask(deadline);
         Ui.showAdd(deadline, tasklist.size());
 
         return true;
@@ -126,7 +126,7 @@ public class Parser {
         String to = combine(parts, toIndex + 1, parts.length - 1);
 
         Task event = new Event(input, desc, from, to);
-        tasklist.add(event);
+        tasklist.addTask(event);
         Ui.showAdd(event, tasklist.size());
 
         return true;
