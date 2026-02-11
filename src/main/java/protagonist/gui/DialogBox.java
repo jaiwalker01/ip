@@ -12,7 +12,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's face
@@ -23,8 +25,13 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private Label time;
 
-    private DialogBox(String text, Image img) {
+    @FXML
+    private GridPane bubble;
+
+    private DialogBox(String text, String timeText, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -35,7 +42,12 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        time.setText(timeText);
+
         displayPicture.setImage(img);
+        displayPicture.setFitWidth(80);
+        displayPicture.setFitHeight(80);
+        displayPicture.setClip(new Circle(40, 40, 40));
     }
 
     /**
@@ -47,15 +59,15 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
 
-        dialog.getStyleClass().add("reply-label");
+        bubble.getStyleClass().add("reply-bubble");
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public static DialogBox getUserDialog(String text, String timeText, Image img) {
+        return new DialogBox(text, timeText, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getDukeDialog(String text, String timeText, Image img) {
+        var db = new DialogBox(text, timeText, img);
         db.flip();
         return db;
     }

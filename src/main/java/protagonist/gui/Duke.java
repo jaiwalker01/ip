@@ -71,7 +71,7 @@ public class Duke {
 
         try {
             System.setOut(ps);
-            System.setErr(ps); // optional but recommended so stack traces/errors show in bubble too
+            System.setErr(ps);
             action.run();
         } finally {
             System.setOut(originalOut);

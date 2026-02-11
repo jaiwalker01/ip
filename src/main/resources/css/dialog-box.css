@@ -1,24 +1,49 @@
-.label {
-    -fx-background-color: linear-gradient(to bottom right, #00ffbf, #00ddff);
-    -fx-border-color: #d55e00 #009e73 #cc79a7 #0072b2;
-    -fx-border-width: 2px;
-    -fx-background-radius: 1em 1em 0 1em;
-    -fx-border-radius: 1em 1em 0 1em;
+/* dialog-box.css */
+
+/* Bubble container (user default) */
+.bubble {
+    -fx-background-color: linear-gradient(to bottom, #2a9df4, #1f78d1);
+    -fx-background-radius: 18;
+    -fx-border-radius: 18;
+    -fx-border-width: 0;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 10, 0.2, 0, 3);
 }
 
-.reply-label {
-    -fx-background-radius: 1em 1em 1em 0;
-    -fx-border-radius: 1em 1em 1em 0;
+/* Bot bubble */
+.bubble.reply-bubble {
+    -fx-background-color: linear-gradient(to bottom, #2d323a, #23272e);
 }
 
+/* Message text */
+#dialog {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-text-fill: white;
+
+    -fx-font-family: "Segoe UI", "System", "Arial";
+    -fx-font-size: 15px;
+}
+
+/* Bot message text */
+.bubble.reply-bubble #dialog {
+    -fx-text-fill: #e5e7eb;
+}
+
+/* Timestamp under message, right aligned */
+.time-label {
+    -fx-font-family: "Segoe UI", "System", "Arial";
+    -fx-font-size: 11px;
+    -fx-text-fill: rgba(255,255,255,0.55);
+    -fx-padding: 0;
+}
+
+/* Bot timestamp */
+.bubble.reply-bubble .time-label {
+    -fx-text-fill: rgba(229,231,235,0.45);
+}
+
+/* Avatar shadow */
 #displayPicture {
-    /* Shadow effect on image. */
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 5, 5);
-
-    /* Change size of image. */
-    -fx-scale-x: 1;
-    -fx-scale-y: 1;
-
-    /* Rotate image clockwise by degrees. */
-    -fx-rotate: 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 10, 0.2, 0, 3);
 }
