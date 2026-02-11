@@ -12,7 +12,7 @@ public class Ui {
      * Prints a line of repeated characters
      */
     public static void printLine() {
-        printLine("=", 50);
+        printLine("-",45 );
     }
 
     /**
@@ -84,21 +84,28 @@ public class Ui {
      * Prints the greeting message for Protagonist
      */
     public static void greeting() {
-        printLine(".", 44);
+
         System.out.println(
-                          "          ____  ____   ___ _____  \n"
-                        + "         |  _ \\|  _ \\ / _ \\_   _| \n"
-                        + "         | |_) | |_) | | | || |   \n"
-                        + "         |  __/|  _ <| |_| || |   \n"
-                        + "         |_|   |_| \\_\\\\___/ |_|   \n"
-                        + "-------------------------------------------\n"
-                        + "         P R O T A G O N I S T\n"
-                        + "         your tasks, your story\n"
-                        + "-------------------------------------------\n"
-                        + "\n"
+//                          ".\n"
+//                        + "         ____  ____   ___  _____  \n"
+//                        + "         |  _  \\|  _  \\ /  _  \\|_   _| \n"
+//                        + "         | |_)  |  |_)  | |  | |   |  |   \n"
+//                        + "         |  __/|  _ <| |_| || |   \n"
+//                        + "         |_|   |_| \\_\\\\___/ |_|   \n"
+//                        + "-------------------------------------------\n"
+//                        + "         P R O T A G O N I S T\n"
+//                        + "         your tasks, your story\n"
+//                        + "-------------------------------------------\n"
+//                        + "\n"
+//                        + "Status check. What's the objective?\n"
+//                        + "\n"
+//                        + "(type \\help to see available commands)\n"
+                          "┌───────────────┐\n"
+                        + "│       PROTAGONIST        │\n"
+                        + "│   your tasks, your story  │\n"
+                        + "└───────────────┘\n\n"
                         + "Status check. What's the objective?\n"
-                        + "\n"
-                        + "(type \\help to see available commands)\n"
+                        + "(type \\help to see available commands)"
         );
 
 

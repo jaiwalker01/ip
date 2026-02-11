@@ -1,0 +1,80 @@
+/* main.css */
+
+.root {
+    /* Telegram-ish dark background (subtle gradient, not flat) */
+    -fx-background-color: linear-gradient(to bottom right, #0b0f14, #0f1a28, #0b0f14);
+
+    /* App-wide Telegram-like font */
+    -fx-font-family: "Segoe UI", "System", "Arial";
+}
+
+/* Keep scroll area blended into background */
+.scroll-pane,
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Optional: remove scrollpane border */
+.scroll-pane {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+/* Input field */
+.text-field {
+    -fx-background-color: rgba(20, 26, 34, 0.92);
+    -fx-text-fill: #e5e7eb;
+    -fx-prompt-text-fill: rgba(148, 163, 184, 0.75);
+
+    -fx-font-size: 15px;
+
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+    -fx-border-color: rgba(38, 48, 65, 0.9);
+    -fx-border-width: 1;
+
+    -fx-padding: 10 12 10 12;
+}
+
+/* Send button */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #2a9df4, #1f78d1);
+    -fx-text-fill: white;
+
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+
+    -fx-padding: 10 14 10 14;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #39a7ff, #207fdd);
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #1b6fbf, #145a9c);
+}
+
+/* Scrollbar */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: rgba(60, 74, 92, 0.8);
+    -fx-background-radius: 1em;
+}
+
+/* Hide increment/decrement buttons */
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}
