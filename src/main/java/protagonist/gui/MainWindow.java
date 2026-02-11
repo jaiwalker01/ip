@@ -33,6 +33,11 @@ public class MainWindow extends AnchorPane {
     /** Injects the Duke instance */
     public void setDuke(Duke d) {
         duke = d;
+
+        // greeting bubble
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(duke.getWelcomeResponse(), dukeImage)
+        );
     }
 
     /**
@@ -48,5 +53,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (duke.shouldExit()) {
+            javafx.application.Platform.exit();
+        }
     }
 }

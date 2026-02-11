@@ -84,7 +84,7 @@ public class Ui {
      * Prints the greeting message for Protagonist
      */
     public static void greeting() {
-        printLine(".", 44);
+
         System.out.println(
                           "          ____  ____   ___ _____  \n"
                         + "         |  _ \\|  _ \\ / _ \\_   _| \n"
