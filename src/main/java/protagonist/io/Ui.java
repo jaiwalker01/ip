@@ -224,13 +224,13 @@ public class Ui {
         emptyLine();
         printLine();
         System.out.println("""
-            protagonist.task.ToDo protagonist.task.Task (generic task to do, no timing to follow)
+            ToDo Task (generic task to do, no timing to follow)
             Usage --> todo <name of task>
 
-            protagonist.task.Deadline protagonist.task.Task (task with a specific deadline)
+            Deadline Task (task with a specific deadline)
             Usage --> deadline <name of task> /by <time>
 
-            protagonist.task.Event protagonist.task.Task (task with a specific start and end)
+            Event Task (task with a specific start and end)
             Usage --> event <name of task> /from <start time> /to <end time>
 
             <time> format:
