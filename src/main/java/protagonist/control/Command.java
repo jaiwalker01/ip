@@ -34,7 +34,6 @@ public class Command {
      * Marks a task from task list
      * @param tasklist
      * @param maybeIndex index of task to be marked
-     * @throws ProtagonistException
      */
     public static void mark(TaskList tasklist, String maybeIndex)
             throws ProtagonistException {
@@ -75,15 +74,15 @@ public class Command {
         }
 
         tasklist.undoTask(index);
-        Ui.unMark(tasklist, index);
+        Ui.unmark(tasklist, index);
     }
 
     /**
      * Deletes task with the given index number if possible.
      * If index number is invalid, error is thrown
-     * @param tasklist
+     * @param tasklist task list
      * @param index index of task to be deleted
-     * @throws ProtagonistException
+     * @throws ProtagonistException when task cannot be deleted
      */
     public static void deleteTask(TaskList tasklist, String index)
             throws ProtagonistException {
@@ -113,7 +112,6 @@ public class Command {
      * Finds tasks in the list with matching keyword
      * @param keyword String input
      * @param taskList task list of user
-     * @throws ProtagonistException
      */
     public static void findTasksInTaskList(String keyword, TaskList taskList)
             throws ProtagonistException {
@@ -126,9 +124,9 @@ public class Command {
 
         if (filtered.size() == 0) {
             Ui.printCannotFindTasks(keyword);
-            return;
+        } else {
+            Ui.printCanFindTasks(keyword, filtered);
         }
 
-        Ui.printCanFindTasks(keyword, filtered);
     }
 }

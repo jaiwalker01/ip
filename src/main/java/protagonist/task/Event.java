@@ -122,14 +122,14 @@ public class Event extends Task {
     @Override
     public String toFileFormat() {
         // T | <0/1> | <name>
-        String done = this.taskStatus() ? "1" : "0";
+        String done = this.isDone() ? "1" : "0";
         return "E | " + done + " | " + this.getDescription() + " | " + this.getRawStartTime()
                 + " | " + this.getRawEndTime();
     }
 
     @Override
     public String toString() {
-        String str = (this.taskStatus()) ? "X" : " ";
+        String str = (this.isDone()) ? "X" : " ";
 
         return "[E][" + str + "] " + description + " (from: " + this.getEventStart()
                 + " to: " + this.getEventEnd() + " )";

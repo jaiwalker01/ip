@@ -84,13 +84,13 @@ public class Deadline extends Task {
     @Override
     public String toFileFormat() {
         // T | <0/1> | <name>
-        String done = this.taskStatus() ? "1" : "0";
+        String done = this.isDone() ? "1" : "0";
         return "D | " + done + " | " + this.getDescription() + " | " + this.getRawTime();
     }
 
     @Override
     public String toString() {
-        String str = (this.taskStatus()) ? "X" : " ";
+        String str = (this.isDone()) ? "X" : " ";
 
         return "[D][" + str + "] " + description + " (by: " + this.getDeadline() + ")";
     }
