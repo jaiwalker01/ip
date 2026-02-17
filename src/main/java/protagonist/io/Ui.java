@@ -170,29 +170,33 @@ public class Ui {
     public static void unknownCommand(String input) {
         boxedPrint(() -> System.out.println(
                 "Unknown command: " + input + "\n\n"
-                + "Please try using one of the following commands:\n\n"
-                + "\\task     --> show all task commands\n"
-                + "\\help     --> access available commands"
+                + "Try one of these:\n"
+                + "  \\help  -> view all commands\n"
+                + "  \\task  -> view task command formats"
         ));
     }
-
 
     /**
      * Prints guide for command usage
      */
     public static void helpCommand() {
         boxedPrint(() -> System.out.println("""
-            Available commands:
-
-            \\task              --> show all task commands
-
-            list               --> list all tasks
-            find <keyword>     --> find task containing <keyword>
-            mark <task no.>    --> mark a task as done
-            unmark <task no.>  --> mark a task as NOT done
-            delete <task no.>  --> delete a task
-            bye                --> exit the chat
-            """));
+        Commands
+        
+        Help
+          \\help              -> show all commands
+          \\task              -> show task command formats
+        
+        Tasks
+          list               -> list all tasks
+          find <keyword>     -> find tasks containing <keyword>
+          mark <task no.>    -> mark a task as done
+          unmark <task no.>  -> mark a task as not done
+          delete <task no.>  -> delete a task
+        
+        System
+          bye                -> exit Protagonist
+        """));
     }
 
     /**
@@ -200,24 +204,23 @@ public class Ui {
      */
     public static void showTaskUsage() {
         boxedPrint(() -> System.out.println("""
-            ToDo Task (generic task to do, no timing to follow)
-            Usage --> todo <name of task>
-    
-            Deadline Task (task with a specific deadline)
-            Usage --> deadline <name of task> /by <time>
-    
-            Event Task (task with a specific start and end)
-            Usage --> event <name of task> /from <start time> /to <end time>
-    
-            <time> format:
-            (following formats are parsed, others are kept as entered)
-    
-            YYYY-MM-DDThh:mm (e.g. 2026-01-19T14:20) --> 19 Jan 2026 2:20pm
-            OR
-            YYYY-MM-DD       (e.g. 2026-01-19)       --> 19 Jan 2026
-            """));
+        Task command formats
+        
+        todo <description>
+          Adds a task with no date/time.
+        
+        deadline <description> /by <date|datetime>
+          Example: deadline return book /by 2026-01-19
+          Example: deadline submit report /by 2026-01-19T14:20
+        
+        event <description> /from <date|datetime> /to <date|datetime>
+          Example: event team meeting /from 2026-01-19T14:00 /to 2026-01-19T15:00
+        
+        Accepted time formats
+          YYYY-MM-DD         -> 19 Jan 2026
+          YYYY-MM-DDThh:mm   -> 19 Jan 2026 2:20 PM
+        """));
     }
-
 
     /**
      * Prints an [ERROR] with the input message (usually an Error message)
