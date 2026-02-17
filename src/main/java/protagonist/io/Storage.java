@@ -61,10 +61,7 @@ public class Storage {
      */
     public static void saveToFile(TaskList taskList) throws ProtagonistException {
         File dir = new File(DIR_NAME);
-        boolean created = dir.mkdirs();
-        if (!created) {
-            throw new ProtagonistException("Failed to create data directory: " + DIR_NAME);
-        }
+        dir.mkdirs();
 
         try (FileWriter fw = new FileWriter(FILE_PATH)) {
             fw.write(taskList.toSaveLines());

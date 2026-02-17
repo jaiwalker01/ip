@@ -10,6 +10,9 @@ import protagonist.task.TaskList;
  * Validates indexing of {@link TaskList} and throws a {@link ProtagonistException} for invalid indexes.
  */
 public class Command {
+    private static final String USAGE_FIND = "Usage: find <keyword>";
+    private static final String INVALID_INDEX_ERR = "Invalid index";
+
     public static void hi() {
         Ui.greeting();
     }
@@ -18,61 +21,53 @@ public class Command {
         Ui.goodbye();
     }
 
-    /**
-     * Prints the tasks in the task list
-     * @param tasklist
-     */
-    public static void printList(TaskList tasklist) {
-        Ui.emptyLine();
-        Ui.printLine();
-        Ui.printGenericListMessage();
-        System.out.println(tasklist);
-        Ui.printLine();
-    }
-
-    /**
-     * Marks a task from task list
-     * @param tasklist
-     * @param maybeIndex index of task to be marked
-     */
-    public static void mark(TaskList tasklist, String maybeIndex)
+    private static int parseAndValidateIndex(String maybeIndex, TaskList tasklist)
             throws ProtagonistException {
         int index;
-
         try {
-            index = Integer.parseInt(maybeIndex) - 1;
+            index = Integer.parseInt(maybeIndex) - 1; // user input is 1-based
         } catch (NumberFormatException e) {
-            throw new ProtagonistException("Invalid index");
+            throw new ProtagonistException(INVALID_INDEX_ERR);
         }
 
         if (index < 0 || index >= tasklist.size()) {
-            throw new ProtagonistException("Invalid index");
+            throw new ProtagonistException(INVALID_INDEX_ERR);
         }
 
+        return index;
+    }
+
+    /**
+     * Prints the tasks in the task list
+     * @param tasklist task list
+     */
+    public static void printList(TaskList tasklist) {
+        Ui.boxedPrint(() -> {
+            Ui.printGenericListMessage();
+            System.out.println(tasklist);
+        });
+    }
+
+
+    /**
+     * Marks a task from task list
+     * @param tasklist task list
+     * @param maybeIndex index of task to be marked
+     */
+    public static void mark(TaskList tasklist, String maybeIndex) throws ProtagonistException {
+        int index = parseAndValidateIndex(maybeIndex, tasklist);
         tasklist.doTask(index);
         Ui.mark(tasklist, index);
     }
 
     /**
      * Unmarks a task from task list
-     * @param tasklist
+     * @param tasklist task list
      * @param maybeIndex index of task to be unmarked
-     * @throws ProtagonistException
+     * @throws ProtagonistException when task cannot be unmarked
      */
-    public static void unmark(TaskList tasklist, String maybeIndex)
-            throws ProtagonistException {
-
-        int index;
-        try {
-            index = Integer.parseInt(maybeIndex) - 1;
-        } catch (NumberFormatException e) {
-            throw new ProtagonistException("Invalid index");
-        }
-
-        if (index < 0 || index >= tasklist.size()) {
-            throw new ProtagonistException("Invalid index");
-        }
-
+    public static void unmark(TaskList tasklist, String maybeIndex) throws ProtagonistException {
+        int index = parseAndValidateIndex(maybeIndex, tasklist);
         tasklist.undoTask(index);
         Ui.unmark(tasklist, index);
     }
@@ -80,33 +75,23 @@ public class Command {
     /**
      * Deletes task with the given index number if possible.
      * If index number is invalid, error is thrown
-     * @param tasklist task list
-     * @param index index of task to be deleted
+     * @param taskList task list
+     * @param maybeIndex index of task to be deleted
      * @throws ProtagonistException when task cannot be deleted
      */
-    public static void deleteTask(TaskList tasklist, String index)
-            throws ProtagonistException {
+    public static void deleteTask(TaskList taskList, String maybeIndex) throws ProtagonistException {
+        int index = parseAndValidateIndex(maybeIndex, taskList);
 
-        int i;
-        try {
-            i = Integer.parseInt(index) - 1;
-        } catch (NumberFormatException e) {
-            throw new ProtagonistException("Invalid index");
-        }
+        Task task = taskList.getTask(index);
+        taskList.removeTask(index);
 
-        if (i < 0 || i >= tasklist.size()) {
-            throw new ProtagonistException("Invalid index");
-        }
-
-        Task task = tasklist.getTask(i);
-        tasklist.removeTask(i);
-        Ui.emptyLine();
-        Ui.printLine();
-        Ui.deleteTaskMsg();
-        Ui.printTask(task);
-        Ui.numOfTasks(tasklist);
-        Ui.printLine();
+        Ui.boxedPrint(() -> {
+            Ui.deleteTaskMsg();
+            Ui.printTask(task);
+            Ui.numOfTasks(taskList);
+        });
     }
+
 
     /**
      * Finds tasks in the list with matching keyword
@@ -117,7 +102,7 @@ public class Command {
             throws ProtagonistException {
 
         if (keyword == null || keyword.trim().isEmpty()) {
-            throw new ProtagonistException("Usage: find <keyword>");
+            throw new ProtagonistException(USAGE_FIND);
         }
 
         TaskList filtered = taskList.findTaskByKeyword(keyword);

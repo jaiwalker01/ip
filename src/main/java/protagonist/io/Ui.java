@@ -26,14 +26,14 @@ public class Ui {
         System.out.println(String.valueOf(text).repeat(Math.max(0, num)));
     }
 
-    private static void boxedPrint(Runnable body) {
+    public static void boxedPrint(Runnable body) {
         emptyLine();
         printLine();
         body.run();
         printLine();
     }
 
-    private static void boxedPrint(String message) {
+    public static void boxedPrint(String message) {
         boxedPrint(() -> System.out.println(message));
     }
 
