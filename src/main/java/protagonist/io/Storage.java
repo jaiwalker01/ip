@@ -64,7 +64,6 @@ public class Storage {
         dir.mkdirs();
 
 
-
         try (FileWriter fw = new FileWriter(FILE_PATH)) {
             fw.write(taskList.toSaveLines());
         } catch (IOException e) {
