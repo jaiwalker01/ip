@@ -9,23 +9,31 @@ public class Task {
     private final String rawString;
     private boolean isDone = false;
 
-    public Task(String rawString) {
-        this.rawString = rawString;
+    private static final String DONE = "1";
+    private static final String NOT_DONE = "0";
+    String done = isDone ? DONE : NOT_DONE;
+
+
+    public Task(String description) {
+        assert description != null : "Task description must not be null";
+        assert !description.isBlank() : "Task description must not be blank";
+
+        this.rawString = description;
     }
 
     public String getDescription() {
         return this.rawString;
     }
 
-    public void taskDone() {
+    public void markDone() {
         isDone = true;
     }
 
-    public void taskNotDone() {
+    public void markUndone() {
         isDone = false;
     }
 
-    public boolean taskStatus() {
+    public boolean isDone() {
         return isDone;
     }
 
@@ -35,13 +43,12 @@ public class Task {
      */
     public String toFileFormat() {
         // T | <0/1> | <name>
-        String done = isDone ? "1" : "0";
         return "T | " + done + " | " + rawString;
     }
 
     @Override
     public String toString() {
-        String str = (this.taskStatus()) ? "X" : " ";
+        String str = (this.isDone()) ? "X" : " ";
         return "[" + str + "] " + rawString;
     }
 

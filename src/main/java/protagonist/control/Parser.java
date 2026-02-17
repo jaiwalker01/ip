@@ -20,7 +20,6 @@ public class Parser {
      * @param input input string
      * @param tasklist task list of user
      * @return false to quit program, else always true
-     * @throws ProtagonistException
      */
     public static boolean parse(String input, TaskList tasklist)
             throws ProtagonistException {

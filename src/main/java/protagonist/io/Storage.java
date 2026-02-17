@@ -46,7 +46,7 @@ public class Storage {
                     Task task = parseLine(line);
                     taskList.addTask(task);
                 } catch (ProtagonistException e) {
-                    // ignore
+                    // Skip corrupted lines in file
                 }
             }
         } catch (IOException e) {
@@ -61,9 +61,7 @@ public class Storage {
      */
     public static void saveToFile(TaskList taskList) throws ProtagonistException {
         File dir = new File(DIR_NAME);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
+        dir.mkdirs();
 
         try (FileWriter fw = new FileWriter(FILE_PATH)) {
             fw.write(taskList.toSaveLines());
@@ -78,7 +76,6 @@ public class Storage {
      *
      * @param line is each line on the storage file containing the taskList
      * @return {@link Task}  is the task created 'line'.
-     * @throws ProtagonistException
      */
     private static Task parseLine(String line) throws ProtagonistException {
         String[] parts = line.split("\\s*\\|\\s*");
@@ -88,8 +85,17 @@ public class Storage {
         }
 
         String type = parts[0].trim();
-        boolean isDone = parts[1].equals("1");
+
+        String doneFlag = parts[1].trim();
+        if (!doneFlag.equals("0") && !doneFlag.equals("1")) {
+            throw new ProtagonistException("Corrupted done flag in save file line: " + line);
+        }
+        boolean isDone = doneFlag.equals("1");
+
         String description = parts[2];
+        if (description.isEmpty()) {
+            throw new ProtagonistException("Empty description in save file line: " + line);
+        }
 
         Task task;
 
@@ -102,14 +108,14 @@ public class Storage {
             if (parts.length < 4) {
                 throw new ProtagonistException("Invalid data entry: " + line);
             }
-            task = new Deadline(description, description, parts[3]);
+            task = new Deadline(description, description, parts[3].trim());
             break;
 
         case "E":
             if (parts.length < 5) {
                 throw new ProtagonistException("Invalid data entry: " + line);
             }
-            task = new Event(description, description, parts[3], parts[4]);
+            task = new Event(description, description, parts[3].trim(), parts[4].trim());
             break;
 
         default:
@@ -117,13 +123,12 @@ public class Storage {
         }
 
         if (isDone) {
-            task.taskDone();
+            task.markDone();
         }
 
         return task;
     }
 }
-
 
 
 

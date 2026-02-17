@@ -7,12 +7,14 @@ import protagonist.task.TaskList;
  * Prints messages and error messages according to taskList or task inputs
  */
 public class Ui {
+    private static final int LINE_WIDTH = 45;
+    private static final String LINE_CHAR = "-";
 
     /**
      * Prints a line of repeated characters
      */
     public static void printLine() {
-        printLine("-",45 );
+        printLine(LINE_CHAR, LINE_WIDTH);
     }
 
     /**
@@ -22,6 +24,17 @@ public class Ui {
      */
     public static void printLine(String text, int num) {
         System.out.println(String.valueOf(text).repeat(Math.max(0, num)));
+    }
+
+    public static void boxedPrint(Runnable body) {
+        emptyLine();
+        printLine();
+        body.run();
+        printLine();
+    }
+
+    public static void boxedPrint(String message) {
+        boxedPrint(() -> System.out.println(message));
     }
 
     /**
@@ -38,10 +51,7 @@ public class Ui {
      */
     public static void mark(TaskList tasklist, int index) {
         Task task = tasklist.getTask(index);
-        emptyLine();
-        printLine();
-        System.out.println("Done. One less loose thread:\n\n" + task.toString());
-        printLine();
+        boxedPrint(() -> System.out.println("Done. One less loose thread:\n\n" + task));
     }
 
     /**
@@ -49,12 +59,9 @@ public class Ui {
      * @param tasklist input task list
      * @param index index number of task to be unmarked
      */
-    public static void unMark(TaskList tasklist, int index) {
+    public static void unmark(TaskList tasklist, int index) {
         Task task = tasklist.getTask(index);
-        emptyLine();
-        printLine();
-        System.out.println("Status reverted, we're not done yet:\n\n" + task.toString());
-        printLine();
+        boxedPrint(() -> System.out.println("Status reverted, we're not done yet:\n\n" + task));
     }
 
     /**
@@ -86,20 +93,6 @@ public class Ui {
     public static void greeting() {
 
         System.out.println(
-//                          ".\n"
-//                        + "         ____  ____   ___  _____  \n"
-//                        + "         |  _  \\|  _  \\ /  _  \\|_   _| \n"
-//                        + "         | |_)  |  |_)  | |  | |   |  |   \n"
-//                        + "         |  __/|  _ <| |_| || |   \n"
-//                        + "         |_|   |_| \\_\\\\___/ |_|   \n"
-//                        + "-------------------------------------------\n"
-//                        + "         P R O T A G O N I S T\n"
-//                        + "         your tasks, your story\n"
-//                        + "-------------------------------------------\n"
-//                        + "\n"
-//                        + "Status check. What's the objective?\n"
-//                        + "\n"
-//                        + "(type \\help to see available commands)\n"
                           "┌───────────────┐\n"
                         + "│       PROTAGONIST        │\n"
                         + "│   your tasks, your story  │\n"
@@ -117,10 +110,7 @@ public class Ui {
      * Prints the goodbye message for Protagonist
      */
     public static void goodbye() {
-        emptyLine();
-        printLine();
-        System.out.println("Signing off. May our paths cross again.");
-        printLine();
+        boxedPrint("Signing off. May our paths cross again.");
     }
 
     /**
@@ -137,12 +127,11 @@ public class Ui {
      * @param totalTasks number of tasks left in task list
      */
     public static void showAdd(Task task, int totalTasks) {
-        emptyLine();
-        printLine();
-        addedTaskMsg();
-        System.out.println(task);
-        System.out.println("You have " + totalTasks + " tasks in the list");
-        printLine();
+        boxedPrint(() -> {
+            addedTaskMsg();
+            System.out.println(task);
+            System.out.println("You have " + totalTasks + " tasks in the list");
+        });
     }
 
     /**
@@ -159,11 +148,10 @@ public class Ui {
      * @param tasklist task list of user
      */
     public static void printCanFindTasks(String keyword, TaskList tasklist) {
-        emptyLine();
-        printLine();
-        System.out.println("Target Acquired. Matching tasks: \n");
-        System.out.println(tasklist);
-        printLine();
+        boxedPrint(() -> {
+            System.out.println("Target Acquired. Matching tasks: \n");
+            System.out.println(tasklist);
+        });
     }
 
     /**
@@ -171,12 +159,8 @@ public class Ui {
      * @param keyword input to search for task
      */
     public static void printCannotFindTasks(String keyword) {
-        emptyLine();
-        printLine();
-        System.out.println("Objective not found. No tasks containing: " + keyword
+        boxedPrint("Objective not found. No tasks containing: " + keyword
                 + "\nTry a different keyword.");
-        printLine();
-
     }
 
     /**
@@ -184,76 +168,68 @@ public class Ui {
      * @param input user input (unknown command)
      */
     public static void unknownCommand(String input) {
-        emptyLine();
-        printLine();
-        System.out.println("Unknown command: "
-                + input
-                + "\n\n"
-                + "Please try using one of the following commands:\n\n"
-                + "\\task     --> show all task commands\n"
-                + "\\help     --> access available commands"
-        );
-        printLine();
+        boxedPrint(() -> System.out.println(
+                "Unknown command: " + input + "\n\n"
+                + "Try one of these:\n"
+                + "  \\help  -> view all commands\n"
+                + "  \\task  -> view task command formats"
+        ));
     }
 
     /**
      * Prints guide for command usage
      */
     public static void helpCommand() {
-        emptyLine();
-        printLine();
-        System.out.println("""
-            Available commands:
-
-            \\task              --> show all task commands
-
-            list               --> list all tasks
-            find <keyword>     --> find task containing <keyword>
-            mark <task no.>    --> mark a task as done
-            unmark <task no.>  --> mark a task as NOT done
-            delete <task no.>  --> delete a task
-            bye                --> exit the chat
-            """);
-        printLine();
+        boxedPrint(() -> System.out.println("""
+        Commands
+        
+        Help
+          \\help              -> show all commands
+          \\task              -> show task command formats
+        
+        Tasks
+          list               -> list all tasks
+          find <keyword>     -> find tasks containing <keyword>
+          mark <task no.>    -> mark a task as done
+          unmark <task no.>  -> mark a task as not done
+          delete <task no.>  -> delete a task
+        
+        System
+          bye                -> exit Protagonist
+        """));
     }
 
     /**
      * Prints guide for task usage
      */
     public static void showTaskUsage() {
-        emptyLine();
-        printLine();
-        System.out.println("""
-            ToDo Task (generic task to do, no timing to follow)
-            Usage --> todo <name of task>
-
-            Deadline Task (task with a specific deadline)
-            Usage --> deadline <name of task> /by <time>
-
-            Event Task (task with a specific start and end)
-            Usage --> event <name of task> /from <start time> /to <end time>
-
-            <time> format:
-            (following formats are parsed, others are kept as entered)
-
-            YYYY-MM-DDThh:mm (e.g. 2026-01-19T14:20) --> 19 Jan 2026 2:20pm
-            OR
-            YYYY-MM-DD       (e.g. 2026-01-19)       --> 19 Jan 2026
-            """);
-        printLine();
+        boxedPrint(() -> System.out.println("""
+        Task command formats
+        
+        todo <description>
+          Adds a task with no date/time.
+        
+        deadline <description> /by <date|datetime>
+          Example: deadline return book /by 2026-01-19
+          Example: deadline submit report /by 2026-01-19T14:20
+        
+        event <description> /from <date|datetime> /to <date|datetime>
+          Example: event team meeting /from 2026-01-19T14:00 /to 2026-01-19T15:00
+        
+        Accepted time formats
+          YYYY-MM-DD         -> 19 Jan 2026
+          YYYY-MM-DDThh:mm   -> 19 Jan 2026 2:20 PM
+        """));
     }
-
 
     /**
      * Prints an [ERROR] with the input message (usually an Error message)
      * @param msg error message to be printed
      */
     public static void showError(String msg) {
-        emptyLine();
-        printLine();
-        System.out.println("[ERROR] " + msg);
-        printLine();
+        boxedPrint("[ERROR] " + msg);
     }
+
 
 
 
