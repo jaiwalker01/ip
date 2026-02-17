@@ -18,23 +18,37 @@ public class TaskList {
     }
 
     public void addTask(Task task) {
+        assertValidInsertTask(task);
         tasks.add(task);
     }
 
     public void removeTask(int index) {
+        assertValidIndex(index);
         tasks.remove(index);
     }
 
     public Task getTask(int index) {
+        assertValidIndex(index);
         return tasks.get(index);
     }
 
     public void doTask(int index) {
-        tasks.get(index).taskDone();
+        assertValidIndex(index);
+        tasks.get(index).markDone();
     }
 
     public void undoTask(int index) {
-        tasks.get(index).taskNotDone();
+        assertValidIndex(index);
+        tasks.get(index).markUndone();
+    }
+
+    private void assertValidIndex(int index) {
+        assert index >= 0 && index < tasks.size()
+                : "Index out of bounds: " + index + ", size of list is " + tasks.size();
+    }
+
+    private void assertValidInsertTask(Task task) {
+        assert task != null : "Task to add must not be null";
     }
 
     /**

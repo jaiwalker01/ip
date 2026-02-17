@@ -11,7 +11,7 @@ public class ToDo extends Task {
     @Override
     public String toFileFormat() {
         // T | <0/1> | <name>
-        String done = this.taskStatus() ? "1" : "0";
+        String done = this.isDone() ? "1" : "0";
         return "T | " + done + " | " + this.getDescription();
     }
 
