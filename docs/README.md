@@ -13,7 +13,7 @@ It supports todos, deadlines and timed events, with fast keyword search, numbere
 
 ---
 
-## Command summary
+## Commands:
 
 ### Help
 - `\help` — show all commands
@@ -167,6 +167,25 @@ Common examples include:
 - invalid date/time formats
 
 ---
+## Command summary
+
+| Action | Format | Example |
+|---|---|---|
+| Help | `\help` | `\help` |
+| Task formats | `\task` | `\task` |
+| List tasks | `list` | `list` |
+| Add todo | `todo <description>` | `todo finish tutorial sheet` |
+| Add deadline | `deadline <description> /by <date\|datetime>` | `deadline submit report /by 2026-01-19T14:20` |
+| Add event | `event <description> /from <date\|datetime> /to <date\|datetime>` | `event team meeting /from 2026-01-19T14:00 /to 2026-01-19T15:00` |
+| Find tasks | `find <keyword>` | `find report` |
+| Mark done | `mark <task no.>` | `mark 2` |
+| Unmark | `unmark <task no.>` | `unmark 2` |
+| Delete task | `delete <task no.>` | `delete 3` |
+| Exit | `bye` | `bye` |
+
+**Accepted date/time formats**
+- `YYYY-MM-DD` (e.g. `2026-01-19`)
+- `YYYY-MM-DDThh:mm` (e.g. `2026-01-19T14:20`)
 
 ## FAQ
 
