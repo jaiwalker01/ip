@@ -7,7 +7,7 @@ import protagonist.task.TaskList;
  * Prints messages and error messages according to taskList or task inputs
  */
 public class Ui {
-    private static final int LINE_WIDTH = 45;
+    private static final int LINE_WIDTH = 60;
     private static final String LINE_CHAR = "-";
 
     /**

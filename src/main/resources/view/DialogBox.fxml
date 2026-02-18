@@ -21,10 +21,9 @@
 
         <!-- Bubble container -->
         <GridPane fx:id="bubble"
-                  styleClass="bubble"
-                  maxWidth="360.0"
+                  maxWidth="1.7976931348623157E308"
                   minHeight="-Infinity"
-                  prefHeight="-1">
+                  styleClass="bubble">
             <HBox.margin>
                 <Insets left="7.0" right="7.0" />
             </HBox.margin>
@@ -38,18 +37,16 @@
             </columnConstraints>
 
             <rowConstraints>
-                <!-- message row grows only as needed -->
                 <RowConstraints vgrow="NEVER" />
-                <!-- time row is compact -->
                 <RowConstraints vgrow="NEVER" />
             </rowConstraints>
 
             <!-- Message text -->
             <Label fx:id="dialog"
-                   wrapText="true"
-                   maxWidth="340.0"
+                   maxWidth="1.7976931348623157E308"
                    minHeight="-Infinity"
                    prefHeight="-1"
+                   wrapText="true"
                    GridPane.columnIndex="0"
                    GridPane.rowIndex="0" />
 
@@ -60,10 +57,10 @@
                   GridPane.columnIndex="0"
                   GridPane.rowIndex="1">
                 <Label fx:id="time"
-                       text="00:00"
-                       styleClass="time-label"
                        minHeight="-Infinity"
-                       prefHeight="-1" />
+                       prefHeight="-1"
+                       styleClass="time-label"
+                       text="00:00" />
             </HBox>
 
         </GridPane>

@@ -1,21 +1,81 @@
 /* dialog-box.css */
 
-/* Bubble container (user default) */
+/*
+AI usage (DialogBox CSS):
+ChatGPT was consulted for GUI styling ideas specific to the dialog box, including
+bubble colour palettes and gradients, border/glow choices, rounded-corner shaping,
+spacing/padding refinements, and timestamp typography/alignment for readability.
+All styling decisions were reviewed and adapted by me, and the final CSS changes were
+implemented, integrated, and tested by me.
+*/
+
+
+/* background */
+.root {
+    -fx-background-color: linear-gradient(to bottom right,
+    #22324a,   /* light navy */
+    #1e3a5f,   /* blue mid */
+    #2a2f4a,   /* muted violet/navy */
+    #3a2433    /* subtle wine tint to match red */
+    );
+
+    -fx-font-family: "Segoe UI", "System", "Arial";
+}
+
+/* width control:
+   - user bubble stays compact
+   - ONLY bot bubble gets longer
+*/
+.bubble {
+    -fx-max-width: 360px;
+}
+
+.bubble.reply-bubble {
+    -fx-max-width: 620px;
+}
+
+/* bubble container (user default) */
 .bubble {
     -fx-background-color: linear-gradient(to bottom, #2a9df4, #1f78d1);
     -fx-background-radius: 18;
+
+    /* thin white outline */
+    -fx-border-color: rgba(255, 255, 255, 0.65);
+    -fx-border-width: 1;
     -fx-border-radius: 18;
-    -fx-border-width: 0;
 
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 10, 0.2, 0, 3);
+    /* smoother glow */
+    -fx-effect:
+            dropshadow(gaussian, rgba(255,255,255,0.18), 20, 0.10, 0, 0),
+            dropshadow(gaussian, rgba(0,0,0,0.28), 14, 0.16, 0, 6);
 }
 
-/* Bot bubble */
+/* protagonist bubble */
 .bubble.reply-bubble {
-    -fx-background-color: linear-gradient(to bottom, #2d323a, #23272e);
+    -fx-background-color: linear-gradient(to bottom, #640337, #50010d);
+    -fx-background-radius: 18;
+
+    /* thin red outline */
+    -fx-border-color: rgba(255, 70, 70, 0.80);
+    -fx-border-width: 1;
+    -fx-border-radius: 18;
+
+    /* smoother red halo + depth */
+    -fx-effect:
+            dropshadow(gaussian, rgba(255,60,60,0.22), 22, 0.10, 0, 0),
+            dropshadow(gaussian, rgba(0,0,0,0.28), 14, 0.16, 0, 6);
 }
 
-/* Message text */
+/* hover polish (only applies if bubble nodes receive hover) */
+.bubble:hover {
+    -fx-border-color: rgba(255, 255, 255, 0.85);
+}
+
+.bubble.reply-bubble:hover {
+    -fx-border-color: rgba(255, 110, 110, 0.90);
+}
+
+/* message text */
 #dialog {
     -fx-background-color: transparent;
     -fx-padding: 0;
@@ -23,27 +83,32 @@
 
     -fx-font-family: "Segoe UI", "System", "Arial";
     -fx-font-size: 15px;
+
+    -fx-wrap-text: true;
+    -fx-line-spacing: 1px;
 }
 
-/* Bot message text */
+/* bot message text */
 .bubble.reply-bubble #dialog {
     -fx-text-fill: #e5e7eb;
 }
 
-/* Timestamp under message, right aligned */
+/* timestamp under message, right aligned */
 .time-label {
     -fx-font-family: "Segoe UI", "System", "Arial";
-    -fx-font-size: 11px;
-    -fx-text-fill: rgba(255,255,255,0.55);
-    -fx-padding: 0;
+    -fx-font-size: 10.5px;
+    -fx-text-fill: rgba(255,255,255,0.45);
+    -fx-padding: 3 0 0 0;
 }
 
-/* Bot timestamp */
+/* bot timestamp */
 .bubble.reply-bubble .time-label {
-    -fx-text-fill: rgba(229,231,235,0.45);
+    -fx-text-fill: rgba(229,231,235,0.38);
 }
 
-/* Avatar shadow */
+/* avatar shadow */
 #displayPicture {
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 10, 0.2, 0, 3);
+    -fx-effect:
+            dropshadow(gaussian, rgba(0,0,0,0.35), 12, 0.18, 0, 4),
+            dropshadow(gaussian, rgba(255,255,255,0.18), 18, 0.10, 0, 0);
 }
