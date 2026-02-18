@@ -31,7 +31,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void mark_noChangeInSize(){
+    public void mark_noChangeInSize() {
         TaskList tasks = new TaskList();
 
         tasks.addTask(new ToDo("C"));
@@ -63,7 +63,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void find_findsAllTasksWithPrefix(){
+    public void find_findsAllTasksWithPrefix() {
         TaskList tasks = new TaskList();
 
         tasks.addTask(new ToDo("Homework 1"));

@@ -13,30 +13,55 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Returns length of task list
+     * @return length
+     */
     public int size() {
         return tasks.size();
     }
 
+    /**
+     * Adds task to the task list
+     * @param task task to be added
+     */
     public void addTask(Task task) {
         assertValidInsertTask(task);
         tasks.add(task);
     }
 
+    /**
+     * Removes task indexed from the task list
+     * @param index index of task
+     */
     public void removeTask(int index) {
         assertValidIndex(index);
         tasks.remove(index);
     }
 
+    /**
+     * Get task indexed from the task list
+     * @param index index of task
+     * @return task
+     */
     public Task getTask(int index) {
         assertValidIndex(index);
         return tasks.get(index);
     }
 
+    /**
+     * Do a task
+     * @param index index of task
+     */
     public void doTask(int index) {
         assertValidIndex(index);
         tasks.get(index).markDone();
     }
 
+    /**
+     * Undo a task
+     * @param index index of task
+     */
     public void undoTask(int index) {
         assertValidIndex(index);
         tasks.get(index).markUndone();

@@ -1,8 +1,9 @@
 package protagonist.control;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 import protagonist.exception.ProtagonistException;
 import protagonist.task.TaskList;
@@ -25,8 +26,7 @@ public class CommandTest {
         tasks.addTask(new ToDo("A"));
 
         // should throw
-        assertThrows(ProtagonistException.class,
-                () -> Command.mark(tasks, "a"));
+        assertThrows(ProtagonistException.class, () -> Command.mark(tasks, "a"));
     }
 
     @Test
@@ -34,8 +34,7 @@ public class CommandTest {
         TaskList tasks = new TaskList();
         tasks.addTask(new ToDo("A"));
 
-        assertThrows(ProtagonistException.class,
-                () -> Command.mark(tasks, "0"));
+        assertThrows(ProtagonistException.class, () -> Command.mark(tasks, "0"));
     }
 
     @Test
@@ -43,8 +42,7 @@ public class CommandTest {
         TaskList tasks = new TaskList();
         tasks.addTask(new ToDo("A"));
 
-        assertThrows(ProtagonistException.class,
-                () -> Command.mark(tasks, "-1"));
+        assertThrows(ProtagonistException.class, () -> Command.mark(tasks, "-1"));
     }
 
     @Test
@@ -52,7 +50,6 @@ public class CommandTest {
         TaskList tasks = new TaskList();
         tasks.addTask(new ToDo("A"));
 
-        assertThrows(ProtagonistException.class,
-                () -> Command.mark(tasks, "5"));
+        assertThrows(ProtagonistException.class, () -> Command.mark(tasks, "5"));
     }
 }

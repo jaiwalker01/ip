@@ -6,14 +6,17 @@ package protagonist.task;
  */
 public class Task {
 
+    private static final String NOT_DONE = "0";
+    private static final String DONE = "1";
+
     private final String rawString;
     private boolean isDone = false;
+    private final String done = isDone ? DONE : NOT_DONE;
 
-    private static final String DONE = "1";
-    private static final String NOT_DONE = "0";
-    String done = isDone ? DONE : NOT_DONE;
-
-
+    /**
+     * Construct a task
+     * @param description name of task
+     */
     public Task(String description) {
         assert description != null : "Task description must not be null";
         assert !description.isBlank() : "Task description must not be blank";

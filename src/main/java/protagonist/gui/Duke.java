@@ -11,10 +11,16 @@ import protagonist.io.Storage;
 import protagonist.io.Ui;
 import protagonist.task.TaskList;
 
+/**
+ * Represents protagonist on GUI
+ */
 public class Duke {
     private final TaskList taskList;
     private boolean isRunning = true;
 
+    /**
+     * Constructs duke
+     */
     public Duke() {
         TaskList loaded;
 
@@ -58,10 +64,21 @@ public class Duke {
         return out.isBlank() ? "(no output)" : out;
     }
 
+    /**
+     * Returns if program should be exited
+     * @return boolean if program should be exited
+     */
     public boolean shouldExit() {
         return !isRunning;
     }
 
+    /**
+     * Runs the given action and captures anything printed to
+     * {@code System.out} or {@code System.err}.
+     *
+     * @param action the code to execute.
+     * @return the text printed during execution as a trimmed {@code String}.
+     */
     private String captureOutput(Runnable action) {
         PrintStream originalOut = System.out;
         PrintStream originalErr = System.err;

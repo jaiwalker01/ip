@@ -34,11 +34,14 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/messi.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/protagonist.png"));
 
+    /**
+     * Initializes dialog container
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
-        // IMPORTANT: make dialog container match scrollpane width so bubbles don't become tall/skinny
+        // make dialog container match scrollpane width so bubbles don't become tall/skinny
         dialogContainer.prefWidthProperty().bind(scrollPane.widthProperty().subtract(20));
     }
 
