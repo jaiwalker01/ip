@@ -32,7 +32,7 @@ public class Ui {
     private static final String TASKS_LEFT_MSG = "You have %d tasks left in the list";
     private static final String TASKS_IN_LIST_MSG = "You have %d tasks in the list";
 
-    private static final String GOODBYE_MSG = "Run terminated. Stay sharp.";
+    private static final String GOODBYE_MSG = "Run terminating in 3s. Stay sharp.";
 
     private static final String HELP_TEXT = """
         Commands
@@ -175,15 +175,12 @@ public class Ui {
      */
     public static void greeting() {
 
-        System.out.println(
-                          "┌───────────────┐\n"
-                        + "│       PROTAGONIST        │\n"
-                        + "│   your tasks, your story  │\n"
-                        + "└───────────────┘\n\n"
-                        + "Status check. What's the objective?\n"
-                        + "(type \\help to see available commands)"
-        );
-        emptyLine();
+        System.out.println("PROTAGONIST");
+        System.out.println("your tasks, your story\n");
+
+        System.out.println("Status check.");
+        System.out.println("What's the objective?");
+        System.out.println("\nType \\help to see available commands.");
     }
 
     /**
