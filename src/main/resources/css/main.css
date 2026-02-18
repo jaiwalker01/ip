@@ -1,26 +1,36 @@
 /* main.css */
 
+/*
+AI usage (main.css):
+ChatGPT was consulted for high-level JavaFX CSS styling ideas for the main UI, including
+background gradient selection, input-field focus feedback, button glow/pressed states,
+scrollbar theming. The final styles were reviewed and adjusted by me, and all changes
+were implemented and tested by me.
+*/
+
 .root {
-    /* Telegram-ish dark background (subtle gradient, not flat) */
+    /* telegram-ish dark background */
     -fx-background-color: linear-gradient(to bottom right, #0b0f14, #0f1a28, #0b0f14);
 
-    /* App-wide Telegram-like font */
+    /* telegram-like font */
     -fx-font-family: "Segoe UI", "System", "Arial";
 }
 
-/* Keep scroll area blended into background */
+/* scroll area blended into background */
 .scroll-pane,
 .scroll-pane .viewport {
     -fx-background-color: transparent;
 }
 
-/* Optional: remove scrollpane border */
+/* to remove scrollpane border */
 .scroll-pane {
     -fx-background-insets: 0;
     -fx-padding: 0;
+    -fx-border-color: rgba(255,255,255,0.06);
+    -fx-border-width: 0;
 }
 
-/* Input field */
+/* input field */
 .text-field {
     -fx-background-color: rgba(20, 26, 34, 0.92);
     -fx-text-fill: #e5e7eb;
@@ -34,9 +44,23 @@
     -fx-border-width: 1;
 
     -fx-padding: 10 12 10 12;
+
+    -fx-highlight-fill: rgba(42, 157, 244, 0.35);
+    -fx-highlight-text-fill: #ffffff;
+    -fx-caret-color: #ffffff;
 }
 
-/* Send button */
+/* input field lighting up when user is typing */
+.text-field:focused {
+    -fx-border-color: rgba(255,255,255,0.35);
+    -fx-border-width: 1.2;
+
+    -fx-effect:
+            dropshadow(gaussian, rgba(255,255,255,0.20), 18, 0.10, 0, 0),
+            dropshadow(gaussian, rgba(0,0,0,0.25), 12, 0.15, 0, 4);
+}
+
+/* send button */
 .button {
     -fx-background-color: linear-gradient(to bottom, #2a9df4, #1f78d1);
     -fx-text-fill: white;
@@ -46,19 +70,54 @@
 
     -fx-background-radius: 16;
     -fx-border-radius: 16;
+    -fx-border-color: rgba(255,255,255,0.10);
+    -fx-border-width: 1;
 
     -fx-padding: 10 14 10 14;
+
+    /* softer base depth */
+    -fx-effect:
+            dropshadow(gaussian, rgba(0,0,0,0.28), 16, 0.18, 0, 6);
 }
 
+/* hover: smooth glow */
 .button:hover {
-    -fx-background-color: linear-gradient(to bottom, #39a7ff, #207fdd);
+    -fx-background-color: linear-gradient(to bottom, #53b6ff, #2a8be6);
+
+    /* very subtle outline */
+    -fx-border-color: rgba(255,255,255,0.22);
+    -fx-border-width: 1;
+
+    /* layered glow + large halo */
+    -fx-effect:
+            dropshadow(gaussian, rgba(255,255,255,0.22), 10, 0.18, 0, 0),
+            dropshadow(gaussian, rgba(255,255,255,0.55), 34, 0.10, 0, 0),
+            dropshadow(gaussian, rgba(0,0,0,0.22), 16, 0.16, 0, 7);
 }
 
+/* slightly less halo while holding click */
+.button:armed {
+    -fx-effect:
+            dropshadow(gaussian, rgba(255,255,255,0.35), 22, 0.08, 0, 0),
+            dropshadow(gaussian, rgba(0,0,0,0.26), 14, 0.16, 0, 6);
+}
+
+/* when pressed: glow dials down + button feels pushed in */
 .button:pressed {
     -fx-background-color: linear-gradient(to bottom, #1b6fbf, #145a9c);
+
+    -fx-effect:
+            dropshadow(gaussian, rgba(255,255,255,0.18), 14, 0.06, 0, 0),
+            dropshadow(gaussian, rgba(0,0,0,0.34), 12, 0.18, 0, 5);
 }
 
-/* Scrollbar */
+/* focus ring for keyboard navigation on the button */
+.button:focused {
+    -fx-border-color: rgba(255,255,255,0.30);
+    -fx-border-width: 1;
+}
+
+/* scrollbar */
 .scroll-bar {
     -fx-background-color: transparent;
 }
@@ -72,7 +131,16 @@
     -fx-background-radius: 1em;
 }
 
-/* Hide increment/decrement buttons */
+/* scrollbar hover and/or pressed feedback */
+.scroll-bar .thumb:hover {
+    -fx-background-color: rgba(90, 110, 140, 0.85);
+}
+
+.scroll-bar .thumb:pressed {
+    -fx-background-color: rgba(120, 145, 185, 0.90);
+}
+
+/* hide increment/decrement buttons */
 .scroll-bar .increment-button,
 .scroll-bar .decrement-button {
     -fx-pref-height: 0;

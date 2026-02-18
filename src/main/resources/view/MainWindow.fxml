@@ -51,7 +51,6 @@
                     AnchorPane.topAnchor="0.0">
 
             <content>
-                <!-- IMPORTANT: remove fixed prefWidth so bubbles don't become tall/skinny -->
                 <VBox fx:id="dialogContainer" />
             </content>
 

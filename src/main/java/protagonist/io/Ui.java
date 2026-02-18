@@ -8,7 +8,7 @@ import protagonist.task.TaskList;
  * This class is responsible for formatting and displaying output only.
  */
 public class Ui {
-    private static final int LINE_WIDTH = 45;
+    private static final int LINE_WIDTH = 60;
     private static final String LINE_CHAR = "-";
 
     private static final String LIST_HEADER = "Mission console online. Issue your command:\n";
