@@ -4,7 +4,6 @@
 
 **Protagonist** is a command-driven task manager that helps you capture objectives quickly and keep your run organised.
 It supports todos, deadlines and timed events, with fast keyword search, numbered task actions (mark, unmark, delete, e.t.c) and clear feedback after every command so you always know what changed and what’s next.
----
 
 ## Quick start
 
